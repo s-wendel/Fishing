@@ -1,0 +1,13 @@
+name: Fishing
+version: ${project.version}
+main: shwendel.fishing.Fishing
+api-version: 1.20
+authors: [ shwendel ]
+description: I love Fishing!
+commands:
+  stats:
+    description: View the stats of a player
+    aliases: [ profile ]
+  craft:
+    description: Open a crafting menu
+    aliases: [ forge ]
