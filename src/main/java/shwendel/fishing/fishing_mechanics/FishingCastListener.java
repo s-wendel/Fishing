@@ -213,20 +213,18 @@ public class FishingCastListener implements Listener {
             Player player = event.getPlayer();
             User user = UserManager.getUser(player);
 
-            if(user.isFishing()) {
-                event.setCancelled(true);
+            if(!user.isFishing()) return;
 
-                ItemStack item = FishingBlock.getFishingBlock(user.getFishHook().getLocation().clone().add(0, -0.2, 0).getBlock().getType()).getRandomCatch(user, user.getFishHook(), Region.CORAL_COAST);
+            event.setCancelled(true);
+            ItemStack item = FishingBlock.getFishingBlock(user.getFishHook().getLocation().clone().add(0, -0.2, 0).getBlock().getType()).getRandomCatch(user, user.getFishHook(), Region.CORAL_COAST);
 
-                player.getInventory().addItem(item);
-                user.setFishHook(null);
+            player.getInventory().addItem(item);
+            user.setFishHook(null);
 
-                for(ItemStack armor : player.getInventory().getArmorContents()) {
-                    if(FishingArmor.isFishingEquipment(armor)) {
-                        FishingArmor.fromItem(armor).afterCatch(user, null);
-                    }
+            for(ItemStack armor : player.getInventory().getArmorContents()) {
+                if(FishingArmor.isFishingEquipment(armor)) {
+                    FishingArmor.fromItem(armor).afterCatch(user, null);
                 }
-
             }
         }
     }
