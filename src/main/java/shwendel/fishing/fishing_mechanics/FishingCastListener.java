@@ -37,7 +37,9 @@ public class FishingCastListener implements Listener {
         Player player = event.getPlayer();
         User user = UserManager.getUser(player);
 
-        event.getHook().setMaxWaitTime(100000000);
+        FishHook hook = event.getHook();
+
+        hook.setMaxWaitTime(100000000);
 
         if(event.getState() == PlayerFishEvent.State.FISHING || event.getState() == PlayerFishEvent.State.IN_GROUND) {
 
@@ -49,27 +51,28 @@ public class FishingCastListener implements Listener {
                 public void run() {
                     if(c == 40) {
                         event.setCancelled(true);
-                        event.getHook().remove();
+                        hook.remove();
                         cancel();
                         return;
                     }
 
-                    ItemStack tool = player.getInventory().getItemInMainHand();
+                    // TODO: address null possibility
+                    ItemStack tool = player.getInventory().getItem(event.getHand());
 
-                    if(tool.getType() != Material.FISHING_ROD || event.getHook().isDead()) {
+                    if(tool.getType() != Material.FISHING_ROD || hook.isDead()) {
                         event.setCancelled(true);
-                        event.getHook().remove();
+                        hook.remove();
                         cancel();
                         return;
                     }
 
-                    FishingBlock fishingBlock = FishingBlock.getFishingBlock(event.getHook().getLocation().clone().add(0, -0.2, 0).getBlock().getType());
+                    FishingBlock fishingBlock = FishingBlock.getFishingBlock(hook.getLocation().clone().add(0, -0.2, 0).getBlock().getType());
 
                     if(fishingBlock != null) {
 
                         for(ItemStack armor : player.getInventory().getArmorContents()) {
                             if(FishingArmor.isFishingEquipment(armor)) {
-                                FishingArmor.fromItem(armor).onCast(user, event.getHook());
+                                FishingArmor.fromItem(armor).onCast(user, hook);
                             }
                         }
 
@@ -88,18 +91,18 @@ public class FishingCastListener implements Listener {
                             double db = 15;
                             // Current degrees
                             double cd = r * 360;
-                            //Location location = event.getHook().getLocation();
+                            //Location location = hook.getLocation();
 
                             @Override
                             public void run() {
 
-                                Location location = event.getHook().getLocation();
+                                Location location = hook.getLocation();
 
                                 ItemStack tool = player.getInventory().getItemInMainHand();
 
-                                if(tool.getType() != Material.FISHING_ROD || event.getHook().isDead()) {
+                                if(tool.getType() != Material.FISHING_ROD || hook.isDead()) {
                                     event.setCancelled(true);
-                                    event.getHook().remove();
+                                    hook.remove();
                                     cancel();
                                     return;
                                 }
@@ -108,7 +111,7 @@ public class FishingCastListener implements Listener {
 
                                     cancel();
 
-                                    user.setFishHook(event.getHook());
+                                    user.setFishHook(hook);
 
                                     ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(location.clone().add(0, 0.25, 0), EntityType.ARMOR_STAND);
                                     armorStand.setInvisible(true);
@@ -144,14 +147,14 @@ public class FishingCastListener implements Listener {
 
                                                 for(ItemStack armor : player.getInventory().getArmorContents()) {
                                                     if(FishingArmor.isFishingEquipment(armor)) {
-                                                        FishingArmor.fromItem(armor).beforeCatch(user, event.getHook(), reelTime);
+                                                        FishingArmor.fromItem(armor).beforeCatch(user, hook, reelTime);
                                                     }
                                                 }
 
                                                 armorStand.remove();
 
                                                 event.setCancelled(true);
-                                                event.getHook().remove();
+                                                hook.remove();
                                                 player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FISHING_BOBBER_RETRIEVE, 1f, 1f);
 
                                                 cancel();
@@ -187,7 +190,7 @@ public class FishingCastListener implements Listener {
                                 double rwx = wx * Math.cos(dr) - wz * Math.sin(dr);
                                 double rwz = wx * Math.sin(dr) + wz * Math.cos(dr);
 
-                                location.getWorld().spawnParticle(Particle.SMOKE_NORMAL, location.getX() + rwx, location.getY() + 0.4, location.getZ() + rwz, 0);
+                                location.getWorld().spawnParticle(Particle.WATER_SPLASH, location.getX() + rwx, location.getY() + 0.4, location.getZ() + rwz, 0);
 
                                 cd -= db;
                                 c++;
