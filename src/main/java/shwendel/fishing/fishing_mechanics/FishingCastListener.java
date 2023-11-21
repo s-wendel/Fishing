@@ -88,7 +88,7 @@ public class FishingCastListener implements Listener {
                     public void run() {
                         Location location = hook.getLocation();
 
-                        if(tool.getType() != Material.FISHING_ROD || hook.isDead()) {
+                        if(hook.isDead()) {
                             event.setCancelled(true);
                             hook.remove();
                             cancel();
