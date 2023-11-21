@@ -29,6 +29,8 @@ public final class Fishing extends JavaPlugin {
         instance = null;
     }
 
+    // CHANGE MADE
+
     public static Fishing getInstance() {
         return instance;
     }
