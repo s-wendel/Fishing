@@ -1,8 +1,6 @@
 package shwendel.fishing.crafting;
 
-import org.bukkit.inventory.ItemStack;
 import org.reflections.Reflections;
-import shwendel.fishing.items.FishingItem;
 
 import java.util.HashMap;
 import java.util.Map;

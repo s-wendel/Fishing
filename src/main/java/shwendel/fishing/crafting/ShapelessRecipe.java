@@ -1,7 +1,5 @@
 package shwendel.fishing.crafting;
 
-import shwendel.fishing.items.FishingItem;
-
 import java.util.HashMap;
 import java.util.Map;
 

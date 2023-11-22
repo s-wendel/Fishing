@@ -1,8 +1,6 @@
-import shwendel.fishing.crafting.ShapedRecipe;
 import shwendel.fishing.crafting.recipes.CoralSandalsRecipe;
 import shwendel.fishing.crafting.recipes.EmeraldBootsRecipe;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.items.materials.dirt.Dirt;
 
 import java.util.HashMap;
