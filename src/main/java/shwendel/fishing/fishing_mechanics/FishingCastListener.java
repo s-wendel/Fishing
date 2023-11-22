@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 import shwendel.fishing.Fishing;
 import shwendel.fishing.fishing_mechanics.blocks.FishingBlock;
 import shwendel.fishing.islands.Region;
@@ -60,48 +61,55 @@ public class FishingCastListener implements Listener {
                 // if still casting, return to loop
                 if (fishingBlock == null) { return; }
 
+                // bobber has hit fishable block, start fish behavior
                 cancel();
 
-                for(ItemStack armor : player.getInventory().getArmorContents()) {
-                    if(FishingArmor.isFishingEquipment(armor)) {
-                        FishingArmor.fromItem(armor).onCast(user, hook);
-                    }
-                }
+//                for(ItemStack armor : player.getInventory().getArmorContents()) {
+//                    if(FishingArmor.isFishingEquipment(armor)) {
+//                        FishingArmor.fromItem(armor).onCast(user, hook);
+//                    }
+//                }
 
                 Random random = new Random();
-                double d = random.nextInt(360);
-                double dr = d * Math.PI / 180;
-                final double r = (ThreadLocalRandom.current().nextDouble(0, 0.5) + 4.5) - (user.getStatValue(Stat.FISHING_SPEED, true) / 100d);
-;
-                final double p = 1.5;
+                double randomScalar = 4.0 + random.nextDouble(4.0);
+                double randomAngle = Math.toRadians(random.nextInt(360));
+                Vector startingOffset = new Vector(randomScalar * Math.sin(randomAngle), 0, randomScalar * Math.cos(randomAngle));
 
-                // bobber has hit fishable block, start fish behavior
+                int velocityAngleOffset = 60 + random.nextInt(30);
+                Vector velocityNormal = startingOffset.clone().normalize().rotateAroundY(Math.toRadians((-1 * random.nextInt(2)) * velocityAngleOffset + 180));
+
+
                 new BukkitRunnable() {
 
-                    int c = 0;
-                    //Degrees between each tick of fishing in the 2 sine waves
-                    double db = 15;
-                    // Current degrees
-                    double cd = r * 360;
+                    Location hookLoc;
+                    Vector fishPos = startingOffset;
+                    Vector fishVel = velocityNormal.multiply(3); // TODO: randomize magnitude
 
                     @Override
                     public void run() {
-                        Location location = hook.getLocation();
-
                         if(hook.isDead()) {
                             event.setCancelled(true);
-                            hook.remove();
                             cancel();
                             return;
                         }
 
-                        if(c >= 360 / db * r) {
+                        hookLoc = hook.getLocation();
+
+                        // simulate fish behavior
+
+                        // need to cap the "gravity" effect
+                        fishVel.add(fishPos.clone().normalize().multiply(-1 * 0.1));
+                        fishPos.add(fishVel.clone().multiply(0.05));
+                        System.out.println(fishPos);
+
+                        // if fish is in biting range
+                        if(fishPos.length() < 0.2) {
 
                             cancel();
 
                             user.setFishHook(hook);
 
-                            ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(location.clone().add(0, 0.25, 0), EntityType.ARMOR_STAND);
+                            ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(hookLoc.clone().add(0, 0.25, 0), EntityType.ARMOR_STAND);
                             armorStand.setInvisible(true);
                             armorStand.setInvulnerable(true);
                             armorStand.setAI(false);
@@ -112,7 +120,7 @@ public class FishingCastListener implements Listener {
                             armorStand.setSmall(true);
                             armorStand.setRotation(0, 0);
 
-                            player.getWorld().playSound(location, Sound.ENTITY_FISHING_BOBBER_SPLASH, 0.5f, 1f);
+                            player.getWorld().playSound(hookLoc, Sound.ENTITY_FISHING_BOBBER_SPLASH, 0.5f, 1f);
 
                             Location armorStandLocation = armorStand.getLocation();
 
@@ -126,7 +134,6 @@ public class FishingCastListener implements Listener {
                                 boolean incrementingY = true;
                                 int c = 0;
                                 long reelTime = System.currentTimeMillis();
-                                int particles = 15;
 
                                 @Override
                                 public void run() {
@@ -172,16 +179,7 @@ public class FishingCastListener implements Listener {
 
                         }
 
-                        double wx = p * cd / 360d;
-                        double wz = Math.sin(cd * Math.PI / 180);
-
-                        double rwx = wx * Math.cos(dr) - wz * Math.sin(dr);
-                        double rwz = wx * Math.sin(dr) + wz * Math.cos(dr);
-
-                        location.getWorld().spawnParticle(Particle.SMOKE_NORMAL, location.getX() + rwx, location.getY() + 0.4, location.getZ() + rwz, 0);
-
-                        cd -= db;
-                        c++;
+                        hookLoc.getWorld().spawnParticle(Particle.SMOKE_NORMAL, hookLoc.add(fishPos), 0);
                     }
 
                 }.runTaskTimer(Fishing.getInstance(), 0, 1);
