@@ -1,7 +1,7 @@
 name: Fishing
 version: ${project.version}
 main: shwendel.fishing.Fishing
-api-version: 1.20
+api-version: 1.19
 authors: [ shwendel ]
 description: I love Fishing!
 commands:

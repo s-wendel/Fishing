@@ -1,15 +1,10 @@
 package shwendel.fishing.fishing_mechanics.blocks;
 
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.FishHook;
 import org.bukkit.inventory.ItemStack;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.FishingItem;
-import shwendel.fishing.items.armor.dirt.*;
-import shwendel.fishing.items.armor.water.BarrelHat;
 import shwendel.fishing.items.fish.dirt.MudMonstrosity;
-import shwendel.fishing.items.fish.water.*;
 import shwendel.fishing.items.materials.dirt.CompactDirt;
 import shwendel.fishing.items.materials.dirt.Dirt;
 import shwendel.fishing.items.materials.dirt.EarthDragonScale;

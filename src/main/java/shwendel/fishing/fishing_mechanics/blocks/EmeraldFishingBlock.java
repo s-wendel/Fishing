@@ -1,21 +1,13 @@
 package shwendel.fishing.fishing_mechanics.blocks;
 
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.FishHook;
 import org.bukkit.inventory.ItemStack;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.items.armor.emerald.EmeraldBoots;
 import shwendel.fishing.items.armor.emerald.EmeraldChestplate;
 import shwendel.fishing.items.armor.emerald.EmeraldHelmet;
 import shwendel.fishing.items.armor.emerald.EmeraldLeggings;
-import shwendel.fishing.items.fish.dirt.MudMonstrosity;
-import shwendel.fishing.items.materials.FishingMaterial;
-import shwendel.fishing.items.materials.dirt.CompactDirt;
-import shwendel.fishing.items.materials.dirt.Dirt;
-import shwendel.fishing.items.materials.dirt.EarthDragonScale;
-import shwendel.fishing.items.materials.dirt.Fossil;
 import shwendel.fishing.items.materials.emerald.CompactEmerald;
 import shwendel.fishing.items.materials.emerald.Emerald;
 import shwendel.fishing.items.materials.emerald.EmeraldHandle;

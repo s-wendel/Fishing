@@ -2,7 +2,6 @@ package shwendel.fishing.crafting.recipes;
 
 import shwendel.fishing.crafting.ShapelessRecipe;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.items.materials.dirt.Dirt;
 
 import java.util.HashMap;

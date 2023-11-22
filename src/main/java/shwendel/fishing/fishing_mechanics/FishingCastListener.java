@@ -1,6 +1,8 @@
 package shwendel.fishing.fishing_mechanics;
 
+import net.minecraft.world.entity.projectile.EntityFishingHook;
 import org.bukkit.*;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftFishHook;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
