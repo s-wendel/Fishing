@@ -4,7 +4,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.FishHook;
 import org.bukkit.inventory.ItemStack;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.items.armor.water.BarrelHat;
 import shwendel.fishing.items.fish.water.*;
 import shwendel.fishing.items.materials.water.CoralShard;

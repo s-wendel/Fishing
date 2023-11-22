@@ -1,26 +1,24 @@
 package shwendel.fishing.user;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
 import shwendel.fishing.items.FishingEquipment;
-import shwendel.fishing.items.FishingItem;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class User {
 
-    private Player player;
+    private UUID uuid;
     private int coins;
     private Map<Stat, Double> cache;
     private Map<Stat, Map<FishingEquipment, Double>> stats;
     private FishHook currentFishHook;
     private long joinDate;
+    private Map<>
 
-    public User(Player player, int coins, long joinDate) {
-        this.player = player;
+    public User(UUID uuid, int coins, long joinDate) {
+        this.uuid = uuid;
         this.coins = coins;
 
         stats = new HashMap<>();
@@ -37,8 +35,12 @@ public class User {
 
     }
 
+    public UUID getUUID() {
+        return uuid;
+    }
+
     public Player getPlayer() {
-        return player;
+        return Bukkit.getPlayer(uuid);
     }
 
     public int getCoins() {

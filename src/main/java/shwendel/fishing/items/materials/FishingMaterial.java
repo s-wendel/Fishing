@@ -7,7 +7,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import shwendel.fishing.Fishing;
-import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.util.ItemBuilder;
 
 public class FishingMaterial extends FishingItem {

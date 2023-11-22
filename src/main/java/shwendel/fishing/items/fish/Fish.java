@@ -1,6 +1,5 @@
 package shwendel.fishing.items.fish;
 
-import com.destroystokyo.paper.Namespaced;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -8,13 +7,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import shwendel.fishing.Fishing;
-import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.util.FishingUtil;
 import shwendel.fishing.util.ItemBuilder;
-
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Fish extends FishingItem {
 

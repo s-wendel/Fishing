@@ -2,7 +2,6 @@ package shwendel.fishing.crafting.recipes;
 
 import shwendel.fishing.crafting.ShapedRecipe;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.items.armor.emerald.EmeraldLeggings;
 import shwendel.fishing.items.materials.emerald.Emerald;
 
