@@ -14,177 +14,41 @@ import shwendel.fishing.Fishing;
 import shwendel.fishing.fishing_mechanics.blocks.FishingBlock;
 import shwendel.fishing.islands.Region;
 import shwendel.fishing.items.armor.FishingArmor;
-import shwendel.fishing.items.armor.emerald.EmeraldBoots;
-import shwendel.fishing.items.armor.emerald.EmeraldChestplate;
-import shwendel.fishing.items.armor.emerald.EmeraldHelmet;
-import shwendel.fishing.items.armor.emerald.EmeraldLeggings;
-import shwendel.fishing.items.armor.water.BarrelHat;
-import shwendel.fishing.items.materials.emerald.CompactEmerald;
-import shwendel.fishing.items.materials.emerald.Emerald;
-import shwendel.fishing.items.materials.emerald.EmeraldHandle;
-import shwendel.fishing.items.materials.emerald.ShinyEmerald;
 import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
 import shwendel.fishing.user.UserManager;
 import shwendel.fishing.util.FishingUtil;
 
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class FishingCastListener implements Listener {
 
+    private final SwimpathNode[][] swimpathArray = {
+            {
+                    new SwimpathNode(2, 6, 0.3, 2.5),
+                    new SwimpathNode(-2, 5, 0.3, 2.5),
+                    new SwimpathNode(1, 4, 0.3, 2.5),
+                    new SwimpathNode(-1, 2, 0.3, 2.5),
+                    new SwimpathNode(0, 0, 1, 2.5)
+            },
+            {
+                    new SwimpathNode(1, 2, 1, 3),
+                    new SwimpathNode(-1, 1, 1, 3.5),
+                    new SwimpathNode(0, 0, 2, 4)
+            }
+    };
+
     @EventHandler
     public void fishEvent(PlayerFishEvent event) {
-        Player player = event.getPlayer();
-        User user = UserManager.getUser(player);
-
         FishHook hook = event.getHook();
-
         hook.setWaitTime(100000000);
 
         PlayerFishEvent.State state = event.getState();
         if(state != PlayerFishEvent.State.FISHING && state != PlayerFishEvent.State.IN_GROUND) { return; }
 
+        UserManager.getUser(event.getPlayer()).setFishHook(hook);
 
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
-                if(hook.isDead()) {
-                    event.setCancelled(true);
-                    hook.remove();
-                    cancel();
-                    return;
-                }
-
-                FishingBlock fishingBlock = FishingBlock.getFishingBlock(hook.getLocation().clone().add(0, -0.2, 0).getBlock().getType());
-                // if still casting, return to loop
-                if (fishingBlock == null) { return; }
-
-                // bobber has hit fishable block, start fish behavior
-                cancel();
-
-//                for(ItemStack armor : player.getInventory().getArmorContents()) {
-//                    if(FishingArmor.isFishingEquipment(armor)) {
-//                        FishingArmor.fromItem(armor).onCast(user, hook);
-//                    }
-//                }
-
-                Random random = new Random();
-                double randomScalar = 4.0 + random.nextDouble(4.0);
-                double randomAngle = Math.toRadians(random.nextInt(360));
-                Vector startingOffset = new Vector(randomScalar * Math.sin(randomAngle), 0, randomScalar * Math.cos(randomAngle));
-
-                int velocityAngleOffset = 60 + random.nextInt(30);
-                Vector velocityNormal = startingOffset.clone().normalize().rotateAroundY(Math.toRadians((-1 * random.nextInt(2)) * velocityAngleOffset + 180));
-
-
-                new BukkitRunnable() {
-
-                    Location hookLoc;
-                    Vector fishPos = startingOffset;
-                    Vector fishVel = velocityNormal.multiply(3); // TODO: randomize magnitude
-
-                    @Override
-                    public void run() {
-                        if(hook.isDead()) {
-                            event.setCancelled(true);
-                            cancel();
-                            return;
-                        }
-
-                        hookLoc = hook.getLocation();
-
-                        // simulate fish behavior
-
-                        // need to cap the "gravity" effect
-                        fishVel.add(fishPos.clone().normalize().multiply(-1 * 0.1));
-                        fishPos.add(fishVel.clone().multiply(0.05));
-                        System.out.println(fishPos);
-
-                        // if fish is in biting range
-                        if(fishPos.length() < 0.2) {
-
-                            cancel();
-
-                            user.setFishHook(hook);
-
-                            ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(hookLoc.clone().add(0, 0.25, 0), EntityType.ARMOR_STAND);
-                            armorStand.setInvisible(true);
-                            armorStand.setInvulnerable(true);
-                            armorStand.setAI(false);
-                            armorStand.setMarker(true);
-                            armorStand.setGravity(false);
-                            armorStand.setSilent(true);
-                            armorStand.getEquipment().setHelmet(FishingUtil.getHead("afb405c1-16ea-4a23-883f-97867e7db3f9", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTc5YTVjOTVlZTE3YWJmZWY0NWM4ZGMyMjQxODk5NjQ5NDRkNTYwZjE5YTQ0ZjE5ZjhhNDZhZWYzZmVlNDc1NiJ9fX0=", "a79a5c95ee17abfef45c8dc224189964944d560f19a44f19f8a46aef3fee4756"));
-                            armorStand.setSmall(true);
-                            armorStand.setRotation(0, 0);
-
-                            player.getWorld().playSound(hookLoc, Sound.ENTITY_FISHING_BOBBER_SPLASH, 0.5f, 1f);
-
-                            Location armorStandLocation = armorStand.getLocation();
-
-                            // I really love runnables
-                            new BukkitRunnable() {
-
-                                float yaw = 0;
-                                double y = 0;
-                                int yawi = 4 ;
-                                double yi = 0.04;
-                                boolean incrementingY = true;
-                                int c = 0;
-                                long reelTime = System.currentTimeMillis();
-
-                                @Override
-                                public void run() {
-
-                                    if(c == user.getStatValue(Stat.REEL_TIME, true) * 20 || !user.isFishing()) {
-
-                                        for(ItemStack armor : player.getInventory().getArmorContents()) {
-                                            if(FishingArmor.isFishingEquipment(armor)) {
-                                                FishingArmor.fromItem(armor).beforeCatch(user, hook, reelTime);
-                                            }
-                                        }
-
-                                        armorStand.remove();
-
-                                        event.setCancelled(true);
-                                        hook.remove();
-                                        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FISHING_BOBBER_RETRIEVE, 1f, 1f);
-
-                                        cancel();
-                                    }
-
-                                    if(y > 1.5) {
-                                        incrementingY = false;
-                                    } else if(y < 0.5) {
-                                        incrementingY = true;
-                                    }
-
-                                    if(yaw + yawi >= 180) {
-                                        yaw = -180;
-                                    }
-
-                                    y += incrementingY ? yi : -1 * yi;
-                                    yaw += yawi;
-
-                                    armorStand.teleport(armorStandLocation.clone().add(0, y, 0));
-                                    armorStand.setRotation(yaw, 0);
-
-                                    c++;
-
-                                }
-
-                            }.runTaskTimer(Fishing.getInstance(), 1, 1);
-
-                        }
-
-                        hookLoc.getWorld().spawnParticle(Particle.SMOKE_NORMAL, hookLoc.add(fishPos), 0);
-                    }
-
-                }.runTaskTimer(Fishing.getInstance(), 0, 1);
-            }
-        }.runTaskTimer(Fishing.getInstance(), 0, 2);
+        rodCast(hook, event);
     }
 
     @EventHandler
@@ -194,18 +58,237 @@ public class FishingCastListener implements Listener {
         Player player = event.getPlayer();
         User user = UserManager.getUser(player);
 
-        if(!user.isFishing()) { return; }
+        // to check if user is currently fishing, see if they have a hook associated with them
+        if(!user.hasHook()) { return; }
 
-        event.setCancelled(true);
-        ItemStack item = FishingBlock.getFishingBlock(user.getFishHook().getLocation().clone().add(0, -0.2, 0).getBlock().getType()).getRandomCatch(user, user.getFishHook(), Region.CORAL_COAST);
-
-        player.getInventory().addItem(item);
-        user.setFishHook(null);
-
-        for(ItemStack armor : player.getInventory().getArmorContents()) {
-            if(FishingArmor.isFishingEquipment(armor)) {
-                FishingArmor.fromItem(armor).afterCatch(user, null);
-            }
+        switch (user.getFishingState()) {
+            case PARRY:
+                FishHook hook = user.getFishHook();
+                player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 1, 1.4f + new Random().nextFloat(0.2f));
+                player.getWorld().spawnParticle(Particle.CRIT, hook.getLocation(), 10);
+                hook.setVelocity(new Vector(0, 0.11f, 0));
+                user.setFishingState(User.FishingState.NONE);
+                event.setCancelled(true);
+                break;
+            case CATCH:
+                ItemStack item = FishingBlock.getFishingBlock(user.getFishHook().getLocation().clone().add(0, -0.2, 0).getBlock().getType()).getRandomCatch(user, user.getFishHook(), Region.CORAL_COAST);
+                player.getInventory().addItem(item);
+                user.setFishHook(null);
+                for (ItemStack armor : player.getInventory().getArmorContents()) {
+                    if (FishingArmor.isFishingEquipment(armor)) {
+                        FishingArmor.fromItem(armor).afterCatch(user, null);
+                    }
+                }
+                break;
+            default:
         }
+    }
+
+    private void rodCast(FishHook hook, PlayerFishEvent event) {
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                if(hook.isDead()) {
+                    event.setCancelled(true);
+                    cancel();
+                    return;
+                }
+
+                FishingBlock fishingBlock = FishingBlock.getFishingBlock(hook.getLocation().clone().add(0, -0.2, 0).getBlock().getType());
+                // bobber has hit fishable block, start fish behavior
+                if (fishingBlock != null) {
+//                    for(ItemStack armor : player.getInventory().getArmorContents()) {
+//                        if(FishingArmor.isFishingEquipment(armor)) {
+//                            FishingArmor.fromItem(armor).onCast(user, hook);
+//                        }
+//                    }
+                    cancel();
+                    startFishing(hook, event);
+                }
+            }
+        }.runTaskTimer(Fishing.getInstance(), 0, 2); // can potentially slow this down if performance becomes an issue
+    }
+
+    private void startFishing(FishHook hook, PlayerFishEvent event) {
+        Player player = event.getPlayer();
+        User user = UserManager.getUser(player);
+        Random random = new Random();
+
+        double initialDistance = 7;
+        double catchDistance = 0.2;
+
+        //int velocityAngleOffset = 60 + random.nextInt(30);
+        //Vector velocityNormal = startingPos.clone().normalize().rotateAroundY(Math.toRadians((-1 * random.nextInt(2)) * velocityAngleOffset + 180));
+
+
+        new BukkitRunnable() {
+
+            Location hookLoc;
+            double randomStartingAngle = Math.toRadians(random.nextInt(360));
+            final Vector fishPos = new Vector(0, 0, initialDistance).rotateAroundY(randomStartingAngle);
+            final Vector fishVel = new Vector();
+
+            int swimpathIndex = 0;
+            int nodeIndex = 0;
+            SwimpathNode[] nodes = swimpathArray[swimpathIndex];
+            Vector target = nodes[nodeIndex].vec2D().rotateAroundY(randomStartingAngle);
+            double magnetism = nodes[nodeIndex].magnetism();
+            double additiveMagnetism = 0;
+            double maxMagnitude = nodes[nodeIndex].maxMagnitude();
+            
+            int parryWaitTicks = 0;
+            boolean catchable = true;
+
+            double distanceFromHook;
+
+            @Override
+            public void run() {
+                if(hook.isDead()) {
+                    event.setCancelled(true); // hasn't this... already happened if hook is dead?
+                    cancel();
+                    return;
+                }
+
+                if (user.getFishingState() == User.FishingState.PARRY) {
+                    parryWaitTicks++;
+                    if (parryWaitTicks > 30) {
+                        event.setCancelled(true);
+                        hook.remove();
+                        user.setFishHook(null);
+                        user.setFishingState(User.FishingState.NONE);
+                        // snapping sfx
+                        player.sendMessage("waited too long! :(");
+                        cancel();
+                    }
+                    return;
+                }
+
+                distanceFromHook = fishPos.clone().subtract(target).length();
+
+                if (distanceFromHook >= catchDistance && !catchable) {
+                    catchable = true;
+                }
+                else if (distanceFromHook < catchDistance && catchable) {
+                    // if we're on the last node, which should always be (0,0)
+                    if (nodeIndex == nodes.length - 1) {
+                        // if we're on the last swimpath
+                        if (swimpathIndex == swimpathArray.length - 1) {
+                            user.setFishingState(User.FishingState.CATCH);
+                            player.playSound(hookLoc, Sound.ENTITY_FISHING_BOBBER_SPLASH, 0.5f, 1f);
+                            hook.setVelocity(fishVel.clone().multiply(0.04).setY(-0.2));
+                            cancel();
+                            catchFish(user, player, hook, hookLoc, event, fishVel);
+                            return;
+                        }
+                        // otherwise, setup for next swimpath
+                        user.setFishingState(User.FishingState.PARRY);
+                        player.playSound(hookLoc, Sound.ENTITY_FISHING_BOBBER_SPLASH, 0.3f, 2);
+                        hook.setVelocity(fishVel.clone().multiply(0.04).setY(0.05));
+
+                        swimpathIndex++;
+                        nodes = swimpathArray[swimpathIndex];
+                        randomStartingAngle = Math.toRadians(random.nextInt(360));
+                        nodeIndex = 0;
+                    } else {
+                        nodeIndex++;
+                    }
+                    target = nodes[nodeIndex].vec2D().rotateAroundY(randomStartingAngle);
+                    magnetism = nodes[nodeIndex].magnetism();
+                    additiveMagnetism = 0;
+                    maxMagnitude = nodes[nodeIndex].maxMagnitude();
+                }
+
+                // take difference of target and fishPos, then set magnitude to magnetism
+                // TODO: force slow rotation of fish, 180s should be difficult to achieve (maybe?)
+                additiveMagnetism += 0.01;
+                // TODO: Maybe have additive magnetism value an attribute of the node?
+                fishVel.add(target.clone().subtract(fishPos).normalize().multiply(magnetism + additiveMagnetism));
+                // cap magnitude
+                if (fishVel.length() > maxMagnitude) {
+                    fishVel.normalize().multiply(maxMagnitude);
+                }
+
+                // step the fish pos
+                fishPos.add(fishVel.clone().multiply(0.05));
+
+                hookLoc = hook.getLocation();
+                hookLoc.getWorld().spawnParticle(Particle.SMOKE_NORMAL, hookLoc.clone().add(fishPos), 0);
+
+                // particles to help test swimpath nodes
+                hookLoc.getWorld().spawnParticle(Particle.FLAME, hookLoc.clone().add(target), 0);
+            }
+
+        }.runTaskTimer(Fishing.getInstance(), 0, 1);
+    }
+
+    private void catchFish(User user, Player player, FishHook hook, Location hookLoc, PlayerFishEvent event, Vector fishVel) {
+
+        // TODO: replace with block entity
+        ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(hookLoc.clone().add(0, 0.25, 0), EntityType.ARMOR_STAND);
+        armorStand.setInvisible(true);
+        armorStand.setInvulnerable(true);
+        armorStand.setAI(false);
+        armorStand.setMarker(true);
+        armorStand.setGravity(false);
+        armorStand.setSilent(true);
+        armorStand.getEquipment().setHelmet(FishingUtil.getHead("afb405c1-16ea-4a23-883f-97867e7db3f9", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTc5YTVjOTVlZTE3YWJmZWY0NWM4ZGMyMjQxODk5NjQ5NDRkNTYwZjE5YTQ0ZjE5ZjhhNDZhZWYzZmVlNDc1NiJ9fX0=", "a79a5c95ee17abfef45c8dc224189964944d560f19a44f19f8a46aef3fee4756"));
+        armorStand.setSmall(true);
+        armorStand.setRotation(0, 0);
+
+        Location armorStandLocation = armorStand.getLocation();
+
+        // I really love runnables
+        new BukkitRunnable() {
+
+            float yaw = 0;
+            double y = 0;
+            final int yawi = 4 ;
+            final double yi = 0.04;
+            boolean incrementingY = true;
+            int c = 0;
+            final long reelTime = System.currentTimeMillis();
+
+            @Override
+            public void run() {
+
+                if(c == user.getStatValue(Stat.REEL_TIME, true) * 20 || !user.hasHook()) {
+
+                    for(ItemStack armor : player.getInventory().getArmorContents()) {
+                        if(FishingArmor.isFishingEquipment(armor)) {
+                            FishingArmor.fromItem(armor).beforeCatch(user, hook, reelTime);
+                        }
+                    }
+
+                    armorStand.remove();
+
+                    event.setCancelled(true);
+                    hook.remove();
+                    player.getWorld().playSound(player, Sound.ENTITY_FISHING_BOBBER_RETRIEVE, 1f, 1f);
+
+                    cancel();
+                }
+
+                if(y > 1.5) {
+                    incrementingY = false;
+                } else if(y < 0.5) {
+                    incrementingY = true;
+                }
+
+                if(yaw + yawi >= 180) {
+                    yaw = -180;
+                }
+
+                y += incrementingY ? yi : -1 * yi;
+                yaw += yawi;
+
+                armorStand.teleport(armorStandLocation.clone().add(0, y, 0));
+                armorStand.setRotation(yaw, 0);
+
+                c++;
+
+            }
+
+        }.runTaskTimer(Fishing.getInstance(), 1, 1);
     }
 }

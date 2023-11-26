@@ -12,12 +12,19 @@ import java.util.Map;
 
 public class User {
 
+    public enum FishingState {
+        NONE,
+        PARRY,
+        CATCH
+    }
+
     private Player player;
     private int coins;
     private Map<Stat, Double> cache;
     private Map<Stat, Map<FishingEquipment, Double>> stats;
     private FishHook currentFishHook;
     private long joinDate;
+    private FishingState fishingState;
 
     public User(Player player, int coins, long joinDate) {
         this.player = player;
@@ -111,7 +118,7 @@ public class User {
         }
     }
 
-    public boolean isFishing() {
+    public boolean hasHook() {
         return currentFishHook != null;
     }
 
@@ -127,4 +134,12 @@ public class User {
         return joinDate;
     }
 
+    public FishingState getFishingState() {
+        return fishingState;
+    }
+
+    public void setFishingState(FishingState fishingState) {
+        player.sendMessage("fishing state: " + fishingState);
+        this.fishingState = fishingState;
+    }
 }
