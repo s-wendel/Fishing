@@ -14,16 +14,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import shwendel.fishing.Fishing;
 import shwendel.fishing.fishing_mechanics.blocks.FishingBlock;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.FishingArmor;
-import shwendel.fishing.items.armor.emerald.EmeraldBoots;
-import shwendel.fishing.items.armor.emerald.EmeraldChestplate;
-import shwendel.fishing.items.armor.emerald.EmeraldHelmet;
-import shwendel.fishing.items.armor.emerald.EmeraldLeggings;
-import shwendel.fishing.items.armor.water.BarrelHat;
-import shwendel.fishing.items.materials.emerald.CompactEmerald;
-import shwendel.fishing.items.materials.emerald.Emerald;
-import shwendel.fishing.items.materials.emerald.EmeraldHandle;
-import shwendel.fishing.items.materials.emerald.ShinyEmerald;
 import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
 import shwendel.fishing.user.UserManager;
@@ -32,6 +22,7 @@ import shwendel.fishing.util.FishingUtil;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+/*
 public class FishingCastListener implements Listener {
 
     @EventHandler
@@ -230,4 +221,4 @@ public class FishingCastListener implements Listener {
         }
     }
 
-}
+}*/

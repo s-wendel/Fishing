@@ -1,5 +1,6 @@
 package shwendel.fishing.items.materials.emerald;
 
+/*
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -19,3 +20,4 @@ public class ShinyEmerald extends FishingMaterial {
     }
 
 }
+*/

@@ -4,11 +4,12 @@ import java.io.File;
 
 public enum ConfigType {
 
+    // File.separator used the wrong separator
     CONFIG("config.yml", ""),
-    ARMOR("armor.yml", File.separator + "items" + File.separator),
-    FISH("fish.yml", File.separator + "items" + File.separator),
-    MATERIAL("material.yml", File.separator + "items" + File.separator),
-    ROD("rod.yml", File.separator + "items" + File.separator),
+    ARMOR("armor.yml", "items/"),
+    FISH("fish.yml", "items/"),
+    MATERIAL("material.yml", "items/"),
+    ROD("rod.yml", "items/"),
     ;
 
     private String fileName;

@@ -1,6 +1,6 @@
 package shwendel.fishing.items.fish.dirt;
 
-import shwendel.fishing.islands.Region;
+/*import shwendel.fishing.islands.Region;
 import shwendel.fishing.items.fish.Fish;
 import shwendel.fishing.util.FishingUtil;
 
@@ -21,4 +21,4 @@ public class MudMonstrosity extends Fish {
         super.catchTime = catchTime;
     }
 
-}
+}*/

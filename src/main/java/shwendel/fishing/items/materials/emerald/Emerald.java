@@ -1,6 +1,6 @@
 package shwendel.fishing.items.materials.emerald;
 
-import org.bukkit.Material;
+/*import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import shwendel.fishing.islands.Region;
 import shwendel.fishing.items.materials.FishingMaterial;
@@ -19,4 +19,4 @@ public class Emerald extends FishingMaterial {
         value = 20;
     }
 
-}
+}*/

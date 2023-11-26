@@ -10,8 +10,6 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import shwendel.fishing.Fishing;
-import shwendel.fishing.crafting.ShapedRecipe;
-import shwendel.fishing.crafting.ShapelessRecipe;
 import shwendel.fishing.crafting.inventory.CraftingInventory;
 
 import java.util.HashMap;
@@ -79,7 +77,7 @@ public class CraftingInventoryListener implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                int[] slots = new int[] { 10, 11, 12, 19, 20, 21, 28, 29, 30 };
+                /*int[] slots = new int[] { 10, 11, 12, 19, 20, 21, 28, 29, 30 };
                 int counter = 0;
                 Map<Integer, FishingItem> items = new HashMap<>();
 
@@ -99,7 +97,7 @@ public class CraftingInventoryListener implements Listener {
                     item = ShapelessRecipe.getItemFromRecipe(items);
                 }
 
-                inventory.setItem(24, item == null ? null : item.createItem());
+                inventory.setItem(24, item == null ? null : item.createItem());*/
             }
         }.runTaskLater(Fishing.getInstance(), 1);
     }

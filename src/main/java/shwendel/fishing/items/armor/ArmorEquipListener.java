@@ -10,7 +10,7 @@ import shwendel.fishing.user.UserManager;
 
 public class ArmorEquipListener implements Listener {
 
-    @EventHandler
+    /*@EventHandler
     public void armorSwap(PlayerArmorChangeEvent event) {
 
         Player player = event.getPlayer();
@@ -30,6 +30,6 @@ public class ArmorEquipListener implements Listener {
             user.removeEquipment(oldEquipment);
         }
 
-    }
+    }*/
 
 }

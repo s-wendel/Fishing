@@ -1,5 +1,6 @@
 package shwendel.fishing.items.fish.water;
 
+/*
 import shwendel.fishing.islands.Region;
 import shwendel.fishing.items.fish.Fish;
 import shwendel.fishing.util.FishingUtil;
@@ -22,3 +23,4 @@ public class Crab extends Fish {
     }
 
 }
+*/

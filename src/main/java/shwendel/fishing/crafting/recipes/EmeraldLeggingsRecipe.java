@@ -1,14 +1,12 @@
 package shwendel.fishing.crafting.recipes;
 
-import shwendel.fishing.crafting.ShapedRecipe;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.emerald.EmeraldLeggings;
-import shwendel.fishing.items.materials.emerald.Emerald;
+import shwendel.fishing.items.FishingItem;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class EmeraldLeggingsRecipe extends ShapedRecipe {
+/*public class EmeraldLeggingsRecipe extends ShapedRecipe {
 
     @Override
     public Map<Integer, FishingItem> getRecipe() {
@@ -31,4 +29,4 @@ public class EmeraldLeggingsRecipe extends ShapedRecipe {
         return new EmeraldLeggings(Region.CORAL_COAST, 1, System.currentTimeMillis());
     }
 
-}
+}*/

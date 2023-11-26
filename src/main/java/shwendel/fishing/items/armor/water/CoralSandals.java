@@ -7,7 +7,6 @@ import org.bukkit.entity.FishHook;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.FishingArmor;
 import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
 import shwendel.fishing.util.FishingUtil;
@@ -15,6 +14,7 @@ import shwendel.fishing.util.FishingUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 public class CoralSandals extends FishingArmor {
     protected final double movementSpeedAmplifier = 1.75;
 
@@ -53,19 +53,22 @@ public class CoralSandals extends FishingArmor {
     @Override
     public void onCast(User user, FishHook fishHook) {
 
-        /*ItemStack hat = user.getPlayer().getEquipment().getHelmet();
+        */
+/*ItemStack hat = user.getPlayer().getEquipment().getHelmet();
 
         user.getStats().get(Stat.FISHING_SPEED).put(user.getEquipment("Barrel Hat", Stat.FISHING_SPEED), user.getStatValue(Stat.FISHING_SPEED, true) + bonusFishingSpeed);
         user.updateCache(Stat.FISHING_SPEED);
 
         user.getStats().get(Stat.FISH_WEIGHT).put(user.getEquipment("Barrel Hat", Stat.FISH_WEIGHT), user.getStatValue(Stat.FISH_WEIGHT, true) + bonusFishWeight);
-        user.updateCache(Stat.FISH_WEIGHT);*/
+        user.updateCache(Stat.FISH_WEIGHT);*//*
+
 
     }
 
     @Override
     public void beforeCatch(User user, FishHook fishHook, long reelTime) {
-        /*ItemStack hat = user.getPlayer().getEquipment().getHelmet();
+        */
+/*ItemStack hat = user.getPlayer().getEquipment().getHelmet();
 
         if(hat != null && hat.hasItemMeta() && ChatColor.stripColor(hat.getItemMeta().getDisplayName()).equalsIgnoreCase("Barrel Hat")) {
 
@@ -75,7 +78,9 @@ public class CoralSandals extends FishingArmor {
             user.getStats().get(Stat.FISH_WEIGHT).put(user.getEquipment("Barrel Hat", Stat.FISH_WEIGHT), stats.get(Stat.FISH_WEIGHT));
             user.updateCache(Stat.FISH_WEIGHT);
 
-        }*/
+        }*//*
+
     }
 
 }
+*/
