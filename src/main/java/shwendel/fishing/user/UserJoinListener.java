@@ -5,11 +5,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
-import shwendel.fishing.items.FishingEquipment;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 public class UserJoinListener implements Listener {
 
     @EventHandler
@@ -29,3 +29,4 @@ public class UserJoinListener implements Listener {
     }
 
 }
+*/

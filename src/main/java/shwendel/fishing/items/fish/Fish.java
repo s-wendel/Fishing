@@ -1,4 +1,5 @@
 package shwendel.fishing.items.fish;
+/*
 
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
@@ -46,3 +47,4 @@ public class Fish extends FishingItem {
     }
 
 }
+*/

@@ -1,5 +1,6 @@
 package shwendel.fishing.items.materials.dirt;
 
+/*
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import shwendel.fishing.islands.Region;
@@ -17,3 +18,4 @@ public class EarthDragonScale extends FishingMaterial {
     }
 
 }
+*/

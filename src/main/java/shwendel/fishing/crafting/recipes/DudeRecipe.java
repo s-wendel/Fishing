@@ -1,12 +1,11 @@
 package shwendel.fishing.crafting.recipes;
 
-import shwendel.fishing.crafting.ShapelessRecipe;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.materials.dirt.Dirt;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 public class DudeRecipe extends ShapelessRecipe {
 
     @Override
@@ -28,3 +27,4 @@ public class DudeRecipe extends ShapelessRecipe {
     }
 
 }
+*/

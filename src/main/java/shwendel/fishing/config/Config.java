@@ -16,23 +16,25 @@ public class Config {
 
     public Config(ConfigType configType) {
         this.configType = configType;
-        this.file = new File(Fishing.getInstance().getDataFolder().getPath() + configType.getPath(), configType.getFileName());
+
+        final String PATH = configType.getPath() + configType.getFileName();
+
+        this.file = new File(Fishing.getInstance().getDataFolder().getPath() + File.separator + PATH);
 
         if(!file.exists()) {
-            try {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
+            Fishing.getInstance().saveResource(PATH, false);
         }
 
         this.fileConfiguration = new YamlConfiguration();
 
         try {
+
             fileConfiguration.load(file);
+
         } catch (IOException | InvalidConfigurationException exception) {
+
             exception.printStackTrace();
+
         }
     }
 

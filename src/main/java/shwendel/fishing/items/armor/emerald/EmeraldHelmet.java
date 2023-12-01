@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.FishHook;
 import org.bukkit.inventory.ItemStack;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.FishingArmor;
 import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
 import shwendel.fishing.util.FishingUtil;
@@ -12,6 +11,7 @@ import shwendel.fishing.util.FishingUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 public class EmeraldHelmet extends FishingArmor {
 
     public EmeraldHelmet(Region region, int edition, long catchTime) {
@@ -46,3 +46,4 @@ public class EmeraldHelmet extends FishingArmor {
     }
 
 }
+*/

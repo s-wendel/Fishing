@@ -1,5 +1,6 @@
-package shwendel.fishing.items.materials;
 
+package shwendel.fishing.items.materials;
+/*
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -7,6 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import shwendel.fishing.Fishing;
+import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.util.ItemBuilder;
 
 public class FishingMaterial extends FishingItem {
@@ -43,3 +45,4 @@ public class FishingMaterial extends FishingItem {
     }
 
 }
+*/

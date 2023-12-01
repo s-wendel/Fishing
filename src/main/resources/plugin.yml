@@ -11,3 +11,6 @@ commands:
   craft:
     description: Open a crafting menu
     aliases: [ forge ]
+  fishingitem:
+    description: Give a FishingItem
+    aliases: [ giveitem ]

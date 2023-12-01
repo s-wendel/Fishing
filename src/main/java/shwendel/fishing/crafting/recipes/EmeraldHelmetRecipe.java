@@ -1,14 +1,11 @@
 package shwendel.fishing.crafting.recipes;
 
-import shwendel.fishing.crafting.ShapedRecipe;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.emerald.EmeraldHelmet;
-import shwendel.fishing.items.materials.emerald.Emerald;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class EmeraldHelmetRecipe extends ShapedRecipe {
+/*public class EmeraldHelmetRecipe extends ShapedRecipe {
 
     @Override
     public Map<Integer, FishingItem> getRecipe() {
@@ -29,4 +26,4 @@ public class EmeraldHelmetRecipe extends ShapedRecipe {
         return new EmeraldHelmet(Region.CORAL_COAST, 1, System.currentTimeMillis());
     }
 
-}
+}*/

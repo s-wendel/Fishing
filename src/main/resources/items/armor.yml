@@ -14,5 +14,5 @@ items:
     ability_description:
       - "&7Gain &e%0%⛃ &7every catch!"
     stats:
-      - FISHING_SPEED:25
-      - FISHING_LUCK:5
+      - FISHING_SPEED@25
+      - FISHING_LUCK@5

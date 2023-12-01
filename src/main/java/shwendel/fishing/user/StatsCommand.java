@@ -23,7 +23,7 @@ public class StatsCommand implements CommandExecutor {
             } catch(Exception exception) {}
         }
 
-        User user = UserManager.getUser(player);
+        User user = null;//UserManager.getUser(player);
 
         sender.sendMessage("");
         sender.sendMessage(ChatColor.BOLD + "Stats of " + player.getName());

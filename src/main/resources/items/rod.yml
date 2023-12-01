@@ -1,0 +1,15 @@
+items:
+  example_rod:
+    name: "Example Rod"
+    material:
+      material: FISHING_ROD
+    value: 1
+    description:
+      - "Oh it's Roddy"
+    # Used to find the ability class
+    ability: "Fishing Rod"
+    ability_description:
+      - "&7Gain &e%0%⛃ &7every catch!"
+    stats:
+      - FISHING_SPEED@25
+      - FISHING_LUCK@5

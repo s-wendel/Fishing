@@ -15,7 +15,7 @@ public class UserManager {
         UUID uuid = user.getPlayer().getUniqueId();;
 
         if(!users.containsKey(uuid)) {
-            users.put(uuid, new User());
+            //users.put(uuid, new User());
         }
 
         return users.get(uuid);

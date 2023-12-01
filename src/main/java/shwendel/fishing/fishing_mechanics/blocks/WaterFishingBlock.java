@@ -4,15 +4,14 @@ import org.bukkit.Material;
 import org.bukkit.entity.FishHook;
 import org.bukkit.inventory.ItemStack;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.water.BarrelHat;
 import shwendel.fishing.items.fish.water.*;
-import shwendel.fishing.items.materials.water.CoralShard;
 import shwendel.fishing.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/*
 public class WaterFishingBlock extends FishingBlock {
 
     @Override
@@ -58,3 +57,4 @@ public class WaterFishingBlock extends FishingBlock {
     }
 
 }
+*/

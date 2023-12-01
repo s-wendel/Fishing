@@ -1,13 +1,11 @@
 package shwendel.fishing.crafting.recipes;
 
-import shwendel.fishing.crafting.ShapedRecipe;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.emerald.EmeraldBoots;
-import shwendel.fishing.items.materials.emerald.CompactEmerald;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 public class EmeraldBootsRecipe extends ShapedRecipe {
 
     @Override
@@ -29,3 +27,4 @@ public class EmeraldBootsRecipe extends ShapedRecipe {
     }
 
 }
+*/
