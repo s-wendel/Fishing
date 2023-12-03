@@ -10,4 +10,8 @@ public enum FishingItem {
 
     ;
 
+    public FishingItemMemory getFishingItemMemory() {
+        return FishingItemManager.getItem(this);
+    }
+
 }

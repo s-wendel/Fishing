@@ -1,9 +1,11 @@
 package shwendel.fishing;
 
+import mc.obliviate.inventory.InventoryAPI;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import shwendel.fishing.crafting.command.CraftingCommand;
 import shwendel.fishing.crafting.listener.CraftingInventoryListener;
+import shwendel.fishing.fishydex.fishtiary.commands.FishtiaryCommand;
 import shwendel.fishing.items.armor.ArmorEquipListener;
 import shwendel.fishing.items.command.FishingItemCommand;
 import shwendel.fishing.user.StatsCommand;
@@ -16,6 +18,8 @@ public final class Fishing extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
+        new InventoryAPI(this).init();
+
         saveDefaultConfig();
 
         PluginManager pluginManager = getServer().getPluginManager();
@@ -26,6 +30,8 @@ public final class Fishing extends JavaPlugin {
         getCommand("stats").setExecutor(new StatsCommand());
         getCommand("craft").setExecutor(new CraftingCommand());
         getCommand("fishingitem").setExecutor(new FishingItemCommand());
+        getCommand("fishtiary").setExecutor(new FishtiaryCommand());
+
     }
 
     @Override

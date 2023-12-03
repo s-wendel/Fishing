@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 
 public class FishtiaryEntry {
 
-    // Represents a single Fishtiarydex entry, e.g. 1000x Cod
+    // Represents a single Fishtiary entry, e.g. 1000x Cod
 
     private FishingItem item;
     private int required; // The required amount of items to unlock this Fishydex entry

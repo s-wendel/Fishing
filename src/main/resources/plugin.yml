@@ -14,3 +14,6 @@ commands:
   fishingitem:
     description: Give a FishingItem
     aliases: [ giveitem ]
+  fishtiary:
+    description: Open the Fishtiary
+    aliases: [ bestiary ]
