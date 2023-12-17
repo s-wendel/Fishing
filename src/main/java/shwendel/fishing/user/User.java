@@ -25,7 +25,7 @@ public class User {
         //stats = new HashMap<>();
         cache = new HashMap<>();
 
-        /**for(Stat stat : Stat.values()) {
+        /*for(Stat stat : Stat.values()) {
             Map<FishingEquipment, Double> values = new HashMap<>();
 
             stats.put(stat, values);
@@ -34,6 +34,10 @@ public class User {
 
         this.joinDate = joinDate;
 
+    }
+
+    public User(Player player, int coins, long joinDate) {
+        this(player.getUniqueId(), coins, joinDate);
     }
 
     public UUID getUUID() {
