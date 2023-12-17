@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
 public class UserJoinListener implements Listener {
 
     @EventHandler
@@ -18,15 +17,8 @@ public class UserJoinListener implements Listener {
 
         User user = new User(player, 0, System.currentTimeMillis());
 
-        for(ItemStack armor : player.getEquipment().getArmorContents()) {
-            if(FishingEquipment.isFishingEquipment(armor)) {
-                user.addEquipment(FishingEquipment.fromItem(armor));
-            }
-        }
-
         UserManager.addUser(user);
 
     }
 
 }
-*/
