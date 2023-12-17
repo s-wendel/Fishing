@@ -1,5 +1,7 @@
 package shwendel.fishing.fishing_mechanics;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -9,6 +11,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
 import shwendel.fishing.Fishing;
 import shwendel.fishing.fishing_mechanics.blocks.FishingBlock;
@@ -224,34 +227,34 @@ public class FishingCastListener implements Listener {
 
     private void catchFish(User user, Player player, FishHook hook, Location hookLoc, PlayerFishEvent event, Vector fishVel) {
 
-        // TODO: replace with block entity
-        ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(hookLoc.clone().add(0, 0.25, 0), EntityType.ARMOR_STAND);
-        armorStand.setInvisible(true);
-        armorStand.setInvulnerable(true);
-        armorStand.setAI(false);
-        armorStand.setMarker(true);
-        armorStand.setGravity(false);
-        armorStand.setSilent(true);
-        armorStand.getEquipment().setHelmet(FishingUtil.getHead("afb405c1-16ea-4a23-883f-97867e7db3f9", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTc5YTVjOTVlZTE3YWJmZWY0NWM4ZGMyMjQxODk5NjQ5NDRkNTYwZjE5YTQ0ZjE5ZjhhNDZhZWYzZmVlNDc1NiJ9fX0=", "a79a5c95ee17abfef45c8dc224189964944d560f19a44f19f8a46aef3fee4756"));
-        armorStand.setSmall(true);
-        armorStand.setRotation(0, 0);
+        TextDisplay textDisplay = (TextDisplay) player.getWorld().spawnEntity(hookLoc.clone().add(0, 0.2, 0), EntityType.TEXT_DISPLAY);
+        textDisplay.text(Component.text("Caught!", TextColor.color(0, 255, 0)));
+        textDisplay.setBillboard(Display.Billboard.CENTER);
+        textDisplay.setShadowed(true);
+        textDisplay.setBackgroundColor(Color.fromARGB(0));
 
-        Location armorStandLocation = armorStand.getLocation();
+        // set interp
+//        Transformation transform = textDisplay.getTransformation();
+//        transform.getTranslation().set(0, 4, 0);
+//        textDisplay.setTransformation(transform);
+//        textDisplay.setInterpolationDuration(20);
+//        textDisplay.setInterpolationDelay(-1);
 
-        // I really love runnables
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Fishing.getInstance(), () -> {
+            Transformation transform = textDisplay.getTransformation();
+            transform.getTranslation().set(0, 2, 0);
+            textDisplay.setTransformation(transform);
+            textDisplay.setInterpolationDuration(100);
+            textDisplay.setInterpolationDelay(0);
+        }, 1);
+
         new BukkitRunnable() {
-
-            float yaw = 0;
-            double y = 0;
-            final int yawi = 4 ;
-            final double yi = 0.04;
-            boolean incrementingY = true;
             int c = 0;
             final long reelTime = System.currentTimeMillis();
 
             @Override
             public void run() {
-
+                c++;
                 if(c == user.getStatValue(Stat.REEL_TIME, true) * 20 || !user.hasHook()) {
 
                     for(ItemStack armor : player.getInventory().getArmorContents()) {
@@ -260,7 +263,9 @@ public class FishingCastListener implements Listener {
                         }
                     }
 
-                    armorStand.remove();
+                    textDisplay.remove();
+
+                    user.setFishingState(User.FishingState.NONE);
 
                     event.setCancelled(true);
                     hook.remove();
@@ -268,25 +273,6 @@ public class FishingCastListener implements Listener {
 
                     cancel();
                 }
-
-                if(y > 1.5) {
-                    incrementingY = false;
-                } else if(y < 0.5) {
-                    incrementingY = true;
-                }
-
-                if(yaw + yawi >= 180) {
-                    yaw = -180;
-                }
-
-                y += incrementingY ? yi : -1 * yi;
-                yaw += yawi;
-
-                armorStand.teleport(armorStandLocation.clone().add(0, y, 0));
-                armorStand.setRotation(yaw, 0);
-
-                c++;
-
             }
 
         }.runTaskTimer(Fishing.getInstance(), 1, 1);
