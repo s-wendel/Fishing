@@ -1,0 +1,8 @@
+items:
+  dirt:
+    name: "Dirt"
+    material:
+      material: DIRT
+    value: 1
+    description:
+      - "Oh it's dirt"

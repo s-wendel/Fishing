@@ -1,0 +1,18 @@
+items:
+  emerald_chestplate:
+    name: "Emerald Chestplate"
+    material:
+      material: LEATHER_CHESTPLATE
+      red: 62
+      green: 206
+      blue: 30
+    value: 2500
+    description:
+      - "Oh it's Emerald Chestplate"
+    # Used to find the ability class
+    ability: "Emerald Chestplate"
+    ability_description:
+      - "&7Gain &e%0%⛃ &7every catch!"
+    stats:
+      - FISHING_SPEED@25
+      - FISHING_LUCK@5
