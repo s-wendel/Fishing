@@ -16,11 +16,9 @@ import org.bukkit.util.Vector;
 import shwendel.fishing.Fishing;
 import shwendel.fishing.fishing_mechanics.blocks.FishingBlock;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.FishingArmor;
 import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
 import shwendel.fishing.user.UserManager;
-import shwendel.fishing.util.FishingUtil;
 
 import java.util.Random;
 
@@ -77,11 +75,6 @@ public class FishingCastListener implements Listener {
                 ItemStack item = FishingBlock.getFishingBlock(user.getFishHook().getLocation().clone().add(0, -0.2, 0).getBlock().getType()).getRandomCatch(user, user.getFishHook(), Region.CORAL_COAST);
                 player.getInventory().addItem(item);
                 user.setFishHook(null);
-                for (ItemStack armor : player.getInventory().getArmorContents()) {
-                    if (FishingArmor.isFishingEquipment(armor)) {
-                        FishingArmor.fromItem(armor).afterCatch(user, null);
-                    }
-                }
                 break;
             default:
         }
@@ -101,11 +94,6 @@ public class FishingCastListener implements Listener {
                 FishingBlock fishingBlock = FishingBlock.getFishingBlock(hook.getLocation().clone().add(0, -0.2, 0).getBlock().getType());
                 // bobber has hit fishable block, start fish behavior
                 if (fishingBlock != null) {
-//                    for(ItemStack armor : player.getInventory().getArmorContents()) {
-//                        if(FishingArmor.isFishingEquipment(armor)) {
-//                            FishingArmor.fromItem(armor).onCast(user, hook);
-//                        }
-//                    }
                     cancel();
                     startFishing(hook, event);
                 }
@@ -256,12 +244,6 @@ public class FishingCastListener implements Listener {
             public void run() {
                 c++;
                 if(c == user.getStatValue(Stat.REEL_TIME, true) * 20 || !user.hasHook()) {
-
-                    for(ItemStack armor : player.getInventory().getArmorContents()) {
-                        if(FishingArmor.isFishingEquipment(armor)) {
-                            FishingArmor.fromItem(armor).beforeCatch(user, hook, reelTime);
-                        }
-                    }
 
                     textDisplay.remove();
 
