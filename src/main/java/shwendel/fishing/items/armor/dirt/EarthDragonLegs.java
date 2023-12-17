@@ -7,7 +7,6 @@ import org.bukkit.entity.FishHook;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.FishingArmor;
 import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
 import shwendel.fishing.util.FishingUtil;
@@ -15,6 +14,7 @@ import shwendel.fishing.util.FishingUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 public class EarthDragonLegs extends FishingArmor {
 
     protected final double bonusFishingLuck = 5;
@@ -75,3 +75,4 @@ public class EarthDragonLegs extends FishingArmor {
     }
 
 }
+*/

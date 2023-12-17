@@ -1,11 +1,8 @@
 package shwendel.fishing.crafting;
 
-import org.bukkit.inventory.ItemStack;
-import shwendel.fishing.items.FishingItem;
-
 import java.util.Map;
 
-public abstract class ShapedRecipe extends Recipe {
+/*public abstract class ShapedRecipe extends Recipe {
 
     public static FishingItem getItemFromRecipe(Map<Integer, FishingItem> recipe) {
         String recipeShape = "";
@@ -52,4 +49,4 @@ public abstract class ShapedRecipe extends Recipe {
         return getShape(getRecipe());
     }
 
-}
+}*/

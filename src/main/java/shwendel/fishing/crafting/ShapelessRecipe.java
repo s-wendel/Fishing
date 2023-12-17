@@ -1,10 +1,9 @@
 package shwendel.fishing.crafting;
 
-import shwendel.fishing.items.FishingItem;
-
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 public abstract class ShapelessRecipe extends Recipe {
 
     public static FishingItem getItemFromRecipe(Map<Integer, FishingItem> recipe) {
@@ -40,3 +39,4 @@ public abstract class ShapelessRecipe extends Recipe {
     }
 
 }
+*/

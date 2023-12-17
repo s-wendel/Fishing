@@ -1,14 +1,11 @@
 package shwendel.fishing.crafting.recipes;
 
-import shwendel.fishing.crafting.ShapedRecipe;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.FishingItem;
-import shwendel.fishing.items.armor.water.CoralSandals;
-import shwendel.fishing.items.materials.water.CoralShard;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 public class CoralSandalsRecipe extends ShapedRecipe {
 
     @Override
@@ -30,3 +27,4 @@ public class CoralSandalsRecipe extends ShapedRecipe {
     }
 
 }
+*/

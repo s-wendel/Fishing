@@ -1,14 +1,11 @@
 package shwendel.fishing.user;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
-import shwendel.fishing.items.FishingEquipment;
 import shwendel.fishing.items.FishingItem;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class User {
 
@@ -19,33 +16,40 @@ public class User {
     }
 
     private Player player;
+    private UUID uuid;
     private int coins;
     private Map<Stat, Double> cache;
-    private Map<Stat, Map<FishingEquipment, Double>> stats;
+    //private Map<Stat, Map<FishingEquipment, Double>> stats;
     private FishHook currentFishHook;
     private long joinDate;
     private FishingState fishingState;
+    // Fishydex collection
+    //private Map<>
 
-    public User(Player player, int coins, long joinDate) {
-        this.player = player;
+    public User(UUID uuid, int coins, long joinDate) {
+        this.uuid = uuid;
         this.coins = coins;
 
-        stats = new HashMap<>();
+        //stats = new HashMap<>();
         cache = new HashMap<>();
 
-        for(Stat stat : Stat.values()) {
+        /**for(Stat stat : Stat.values()) {
             Map<FishingEquipment, Double> values = new HashMap<>();
 
             stats.put(stat, values);
             cache.put(stat, stat.getBase());
-        }
+        }*/
 
         this.joinDate = joinDate;
 
     }
 
+    public UUID getUUID() {
+        return uuid;
+    }
+
     public Player getPlayer() {
-        return player;
+        return Bukkit.getPlayer(uuid);
     }
 
     public int getCoins() {
@@ -56,9 +60,9 @@ public class User {
         this.coins = coins;
     }
 
-    public Map<Stat, Map<FishingEquipment, Double>> getStats() {
+    /*public Map<Stat, Map<FishingEquipment, Double>> getStats() {
         return stats;
-    }
+    }*/
 
     public double getStatValue(Stat stat, boolean cacheValue) {
 
@@ -68,9 +72,9 @@ public class User {
 
         double value = stat.getBase();
 
-        for(FishingItem item : stats.get(stat).keySet()) {
+        /*for(FishingItem item : stats.get(stat).keySet()) {
             value += stats.get(stat).get(item);
-        }
+        }*/
 
         if(value < 0) {
             value = 0;
@@ -79,20 +83,20 @@ public class User {
         return value;
     }
 
-    public FishingEquipment getEquipment(String name, Stat stat) {
+    /*public FishingEquipment getEquipment(String name, Stat stat) {
         for(FishingEquipment equipment : stats.get(stat).keySet()) {
             if(equipment.getName().equalsIgnoreCase(name)) {
                 return equipment;
             }
         }
         return null;
-    }
+    }*/
 
     public void updateCache(Stat stat) {
         cache.put(stat, getStatValue(stat, false));
     }
 
-    public void addEquipment(FishingEquipment item) {
+    /*public void addEquipment(FishingEquipment item) {
         for(Stat stat : item.getStats().keySet()) {
             stats.get(stat).put(item, item.getStats().get(stat));
             updateCache(stat);
@@ -116,7 +120,7 @@ public class User {
             }
             updateCache(stat);
         }
-    }
+    }*/
 
     public boolean hasHook() {
         return currentFishHook != null;

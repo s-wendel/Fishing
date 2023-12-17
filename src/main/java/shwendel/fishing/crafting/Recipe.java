@@ -1,14 +1,12 @@
 package shwendel.fishing.crafting;
 
-import org.bukkit.inventory.ItemStack;
 import org.reflections.Reflections;
-import shwendel.fishing.items.FishingItem;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class Recipe {
+/*public abstract class Recipe {
 
     public static HashMap<String, Recipe> recipes = new HashMap<>();
 
@@ -27,4 +25,4 @@ public abstract class Recipe {
 
     public abstract FishingItem getResult();
 
-}
+}*/

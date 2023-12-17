@@ -7,14 +7,14 @@ import org.bukkit.entity.FishHook;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.FishingArmor;
 import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class EmeraldBoots extends FishingArmor {
+/*
+*public class EmeraldBoots extends FishingArmor {
 
     public EmeraldBoots(Region region, int edition, long catchTime) {
         name = "Emerald Boots";
@@ -51,3 +51,4 @@ public class EmeraldBoots extends FishingArmor {
     }
 
 }
+*/

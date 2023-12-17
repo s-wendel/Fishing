@@ -3,22 +3,13 @@ package shwendel.fishing.items.armor;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.FishHook;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import shwendel.fishing.Fishing;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.FishingEquipment;
-import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.items.armor.dirt.*;
-import shwendel.fishing.items.armor.emerald.EmeraldBoots;
-import shwendel.fishing.items.armor.emerald.EmeraldChestplate;
-import shwendel.fishing.items.armor.emerald.EmeraldHelmet;
-import shwendel.fishing.items.armor.emerald.EmeraldLeggings;
-import shwendel.fishing.items.armor.water.BarrelHat;
-import shwendel.fishing.items.armor.water.CoralSandals;
 import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
 import shwendel.fishing.util.FishingUtil;
@@ -27,6 +18,7 @@ import shwendel.fishing.util.ItemBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 public class FishingArmor extends FishingEquipment {
 
     protected boolean hasAbility = false;
@@ -133,3 +125,4 @@ public class FishingArmor extends FishingEquipment {
     public void onCast(User user, FishHook fishHook) {}
 
 }
+*/

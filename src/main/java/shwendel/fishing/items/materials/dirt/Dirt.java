@@ -1,4 +1,5 @@
 package shwendel.fishing.items.materials.dirt;
+/*
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -17,3 +18,4 @@ public class Dirt extends FishingMaterial {
     }
 
 }
+*/

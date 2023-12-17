@@ -9,11 +9,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import shwendel.fishing.Fishing;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.emerald.EmeraldBoots;
-import shwendel.fishing.items.armor.emerald.EmeraldChestplate;
-import shwendel.fishing.items.armor.emerald.EmeraldHelmet;
-import shwendel.fishing.items.armor.emerald.EmeraldLeggings;
-import shwendel.fishing.items.armor.water.BarrelHat;
 import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
 import shwendel.fishing.util.FishingUtil;
@@ -22,6 +17,7 @@ import shwendel.fishing.util.ItemBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 public class FishingEquipment extends FishingItem {
 
     protected Map<Stat, Double> stats;
@@ -113,3 +109,4 @@ public class FishingEquipment extends FishingItem {
     }
 
 }
+*/

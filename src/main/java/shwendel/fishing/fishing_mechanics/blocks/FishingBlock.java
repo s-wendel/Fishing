@@ -23,7 +23,7 @@ public abstract class FishingBlock {
 
     public static FishingBlock[] getFishingBlocks() {
         return new FishingBlock[] {
-                new WaterFishingBlock(),
+                //new WaterFishingBlock(),
                 new DirtFishingBlock(),
                 new EmeraldFishingBlock()
         };
