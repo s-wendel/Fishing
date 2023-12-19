@@ -71,9 +71,7 @@ public class FishingItemManager {
                 } else if(material == Material.PLAYER_HEAD) {
 
                     item = FishingUtil.getHead(
-                            fileConfiguration.getString(MATERIAL_SECTION + ".uuid"),
-                            fileConfiguration.getString(MATERIAL_SECTION + ".value"),
-                            fileConfiguration.getString(MATERIAL_SECTION + ".url")
+                            fileConfiguration.getString(MATERIAL_SECTION + ".texture")
                     );
 
                 }

@@ -13,13 +13,13 @@ import java.util.concurrent.TimeUnit;
 
 public class FishingUtil {
 
-    public static ItemStack getHead(String uuid, String value, String url) {
-        PlayerProfile head = Bukkit.createProfile(UUID.fromString(uuid), "skin127569846");
-        head.setProperty(new ProfileProperty("textures", value, url));
+    public static ItemStack getHead(String texture) {
+        PlayerProfile profile = Bukkit.createProfile(UUID.randomUUID(), "name_test");
+        profile.setProperty(new ProfileProperty("textures", texture));
         ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
-        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
-        skullMeta.setPlayerProfile(head);
-        skull.setItemMeta(skullMeta);
+        SkullMeta meta = (SkullMeta) skull.getItemMeta();
+        meta.setPlayerProfile(profile);
+        skull.setItemMeta(meta);
         return skull;
     }
 
@@ -65,3 +65,4 @@ public class FishingUtil {
     }
 
 }
+
