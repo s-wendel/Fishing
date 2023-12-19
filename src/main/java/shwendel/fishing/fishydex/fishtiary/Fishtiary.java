@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class Fishtiary {
 
-    public static final Map<FishingItem, FishtiarySet> FISHTIARY_SETS = new HashMap<>();
+    public static final Map<FishingItem.ID, FishtiarySet> FISHTIARY_SETS = new HashMap<>();
 
     static {
 
@@ -24,7 +24,7 @@ public class Fishtiary {
 
                 set.addEntries();
 
-                FISHTIARY_SETS.put(set.getItem(), set);
+                FISHTIARY_SETS.put(set.getID(), set);
 
             } catch(Exception exception) {}
 

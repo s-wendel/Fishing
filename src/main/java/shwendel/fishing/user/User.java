@@ -3,7 +3,6 @@ package shwendel.fishing.user;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
-import shwendel.fishing.items.FishingItem;
 
 import java.util.*;
 

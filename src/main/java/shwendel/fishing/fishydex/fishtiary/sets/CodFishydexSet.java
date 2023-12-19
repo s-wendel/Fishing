@@ -1,92 +1,39 @@
 package shwendel.fishing.fishydex.fishtiary.sets;
 
-import org.bukkit.ChatColor;
-import shwendel.fishing.fishydex.fishtiary.FishtiaryEntry;
 import shwendel.fishing.fishydex.fishtiary.FishtiarySet;
 import shwendel.fishing.items.FishingItem;
 
-import java.util.Arrays;
+import java.util.function.Consumer;
 
 public class CodFishydexSet extends FishtiarySet {
 
-    @Override
-    public FishingItem getItem() {
-        return FishingItem.COD;
+    public CodFishydexSet() {
+        super(
+                FishingItem.ID.COD,
+                new int[]{
+                        5,
+                        15,
+                        25,
+                        45,
+                        75,
+                        125
+                },
+                new String[][]{
+                        {"1x Men"},
+                        {"2x Men"},
+                        {"2x Men"},
+                        {"2x Men"},
+                        {"2x Men"},
+                        {"2x Men","1x Burly Man"}
+                },
+                new Consumer[]{
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                }
+        );
     }
-
-    @Override
-    public void addEntries() {
-
-        FishingItem item = getItem();
-
-        addEntry(new FishtiaryEntry(
-                item,
-                5,
-                Arrays.asList(
-                        "1x Men"
-                ),
-                user -> {
-                    // Consumer
-                }
-        ));
-
-        addEntry(new FishtiaryEntry(
-                item,
-                15,
-                Arrays.asList(
-                        "2x Men"
-                ),
-                user -> {
-                    // Consumer, Make sure to implement the 2x Men.
-                }
-        ));
-
-        addEntry(new FishtiaryEntry(
-                item,
-                25,
-                Arrays.asList(
-                        "2x Men"
-                ),
-                user -> {
-                    // Consumer, Make sure to implement the 2x Men.
-                }
-        ));
-
-        addEntry(new FishtiaryEntry(
-                item,
-                45,
-                Arrays.asList(
-                        "2x Men"
-                ),
-                user -> {
-                    // Consumer, Make sure to implement the 2x Men.
-                }
-        ));
-
-        addEntry(new FishtiaryEntry(
-                item,
-                75,
-                Arrays.asList(
-                        "2x Men"
-                ),
-                user -> {
-                    // Consumer, Make sure to implement the 2x Men.
-                }
-        ));
-
-        addEntry(new FishtiaryEntry(
-                item,
-                125,
-                Arrays.asList(
-                        "2x Men"
-                ),
-                user -> {
-                    // Consumer, Make sure to implement the 2x Men.
-                }
-        ));
-
-
-
-    }
-
 }

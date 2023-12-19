@@ -6,15 +6,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.inventory.ItemStack;
 import shwendel.fishing.fishydex.fishtiary.FishtiaryEntry;
 import shwendel.fishing.fishydex.fishtiary.FishtiarySet;
 import shwendel.fishing.items.FishingItem;
-import shwendel.fishing.items.FishingItemManager;
-import shwendel.fishing.items.FishingItemMemory;
 import shwendel.fishing.util.ProgressBar;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,14 +24,14 @@ public class FishtiarySetGUI extends Gui {
     private static final Icon BLANK = new Icon(Material.BLACK_STAINED_GLASS_PANE)
             .setName(" ");
 
-    private FishtiarySet set;
+    private final FishtiarySet set;
 
     public FishtiarySetGUI(Player player, FishtiarySet set) {
         super(
                 player,
-                set.getItem().toString() + "_FISHTIARYSET",
-                "Fishtiary ➡ " + FishingItemManager.getItem(set.getItem()).getName(),
-                6
+                "fishtiary-" + set.getID(),
+                "Fishtiary ➡ " + set.getItem().getName(),
+                6 // number of rows
         );
         this.set = set;
     }
@@ -43,30 +39,29 @@ public class FishtiarySetGUI extends Gui {
     @Override
     public void onOpen(InventoryOpenEvent event) {
 
-        FishingItemMemory fishingItemMemory = set.getItem().getFishingItemMemory();
-        String fishingItemName = fishingItemMemory.getName();
+        FishingItem fishingItem = set.getItem();
+        String fishingItemName = fishingItem.getName();
 
-        int total = 1; // The amount the player has collected TODO
+        int total = 7; // TODO: The amount the player has collected
 
-        for(int i = 0; i < 54; i++) {
+        for(int i = 0; i < 54; i++) { // iterate over each inv slot
 
             int snakeIndex = getSnakeIndex(i);
 
             if(snakeIndex >= 0) {
 
-                FishtiaryEntry entry = set.getEntry(snakeIndex);
                 Icon icon;
 
-                if(entry == null) {
-
+                if (i >= set.size()) {
                     icon = DOES_NOT_EXIST;
-
                 } else {
+                    FishtiaryEntry entry = set.getEntry(snakeIndex);
+                    boolean hasEnough = entry.getRequired() <= total;
+                    Material mat = hasEnough ? Material.LIME_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE;
 
-                    icon = new Icon(Material.LIME_STAINED_GLASS_PANE)
-                            .setName(ChatColor.GREEN + fishingItemName + " " + (snakeIndex + 1))
+                    icon = new Icon(mat)
+                            .setName((hasEnough ? ChatColor.GREEN : ChatColor.RED) + fishingItemName + " " + (snakeIndex + 1))
                             .setLore(getEntryLore(entry, total));
-
                 }
 
                 addItem(i, icon);
@@ -76,7 +71,10 @@ public class FishtiarySetGUI extends Gui {
             switch(i) {
 
                 case 4:
-                    // Mat
+                    addItem(i, new Icon(fishingItem.getItem())
+                            .setName("this is fish :)")
+                            .setLore("put some lore here or something, lol!")
+                    );
                     break;
 
                 case 49:
@@ -175,7 +173,7 @@ public class FishtiarySetGUI extends Gui {
 
     private List<String> getEntryLore(FishtiaryEntry entry, int total) {
 
-        String fishingItemName = entry.getItem().getFishingItemMemory().getName();
+        String fishingItemName = set.getItem().getName();
 
         int required = entry.getRequired();
         double progress = (double) total / required;
@@ -187,16 +185,15 @@ public class FishtiarySetGUI extends Gui {
         lore.add(ProgressBar.getProgressBar(progress));
         lore.add("");
 
-        List<String> rewards = entry.getRewards();
-        int rewardsSize = rewards.size();
-        boolean hasRewards = rewardsSize > 0;
+        String[] rewards = entry.getRewards();
+        int rewardsSize = rewards.length;
 
-        if(hasRewards) {
+        if(rewardsSize > 0) {
 
             lore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "REWARDS");
 
             for(int i = 0; i < rewardsSize; i++) {
-                lore.add(ChatColor.DARK_GRAY + "➡ " + ChatColor.WHITE + rewards.get(i));
+                lore.add(ChatColor.DARK_GRAY + "➡ " + ChatColor.WHITE + rewards[i]);
             }
 
             lore.add("");

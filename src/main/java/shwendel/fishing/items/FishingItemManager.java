@@ -20,7 +20,7 @@ public class FishingItemManager {
 
     private static final String ITEM_SECTION = "items";
 
-    private static Map<FishingItem, FishingItemMemory> items;
+    private static Map<FishingItem.ID, FishingItem> items;
 
 
     static {
@@ -38,7 +38,7 @@ public class FishingItemManager {
 
             for(String stringId : fileConfiguration.getConfigurationSection(ITEM_SECTION).getKeys(false)) {
 
-                FishingItem id = FishingItem.valueOf(stringId.toUpperCase());
+                FishingItem.ID id = FishingItem.ID.valueOf(stringId.toUpperCase());
 
                 // Config sections
                 final String ID_SECTION = ITEM_SECTION + "." + stringId;
@@ -91,7 +91,7 @@ public class FishingItemManager {
 
                 }
 
-                items.put(id, new FishingItemMemory(
+                items.put(id, new FishingItem(
                         id,
                         item,
                         ChatColor.translateAlternateColorCodes('&', fileConfiguration.getString(ID_SECTION + ".name")),
@@ -107,7 +107,7 @@ public class FishingItemManager {
 
     }
 
-    public static FishingItemMemory getItem(FishingItem item) {
+    public static FishingItem getItem(FishingItem.ID item) {
         return items.getOrDefault(item, null);
     }
 
