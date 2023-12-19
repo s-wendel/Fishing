@@ -27,7 +27,6 @@ public final class Fishing extends JavaPlugin {
         PluginManager pluginManager = getServer().getPluginManager();
 
         pluginManager.registerEvents(new UserJoinListener(), this);
-//        pluginManager.registerEvents(new FishingCastListener(), this);
         pluginManager.registerEvents(new ArmorEquipListener(), this);
         pluginManager.registerEvents(new CraftingInventoryListener(), this);
         pluginManager.registerEvents(new FishingCastListener(), this);

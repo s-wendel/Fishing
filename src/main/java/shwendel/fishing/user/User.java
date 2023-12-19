@@ -146,7 +146,6 @@ public class User {
     }
 
     public void setFishingState(FishingState fishingState) {
-        getPlayer().sendMessage("fishing state: " + fishingState);
         this.fishingState = fishingState;
     }
 }

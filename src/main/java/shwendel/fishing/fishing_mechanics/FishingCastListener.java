@@ -1,5 +1,6 @@
 package shwendel.fishing.fishing_mechanics;
 
+import jdk.javadoc.internal.doclint.HtmlTag;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.*;
@@ -14,7 +15,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
 import shwendel.fishing.Fishing;
-import shwendel.fishing.fishing_mechanics.blocks.FishingBlock;
 import shwendel.fishing.islands.Region;
 import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
@@ -72,8 +72,9 @@ public class FishingCastListener implements Listener {
                 event.setCancelled(true);
                 break;
             case CATCH:
-                ItemStack item = FishingBlock.getFishingBlock(user.getFishHook().getLocation().clone().add(0, -0.2, 0).getBlock().getType()).getRandomCatch(user, user.getFishHook(), Region.CORAL_COAST);
-                player.getInventory().addItem(item);
+                // TODO: phase out fishingblock
+                //ItemStack item = FishingBlock.getFishingBlock(user.getFishHook().getLocation().clone().add(0, -0.2, 0).getBlock().getType()).getRandomCatch(user, user.getFishHook(), Region.CORAL_COAST);
+                player.getInventory().addItem(new ItemStack(Material.SALMON));
                 user.setFishHook(null);
                 break;
             default:
@@ -81,6 +82,7 @@ public class FishingCastListener implements Listener {
     }
 
     private void rodCast(FishHook hook, PlayerFishEvent event) {
+        Player player = event.getPlayer();
         new BukkitRunnable() {
 
             @Override
@@ -91,9 +93,19 @@ public class FishingCastListener implements Listener {
                     return;
                 }
 
-                FishingBlock fishingBlock = FishingBlock.getFishingBlock(hook.getLocation().clone().add(0, -0.2, 0).getBlock().getType());
+                // TODO: merge with isDead check
+                if (player.isInWater()) {
+                    hook.remove();
+                    event.setCancelled(true);
+                    cancel();
+                    player.getWorld().playSound(player, Sound.ENTITY_FISHING_BOBBER_RETRIEVE, 1f, 1f);
+                    return;
+                }
+
+                //FishingBlock fishingBlock = FishingBlock.getFishingBlock(hook.getLocation().clone().add(0, -0.2, 0).getBlock().getType());
+                // TODO: phase out fishing block
                 // bobber has hit fishable block, start fish behavior
-                if (fishingBlock != null) {
+                if (hook.getLocation().clone().add(0, -0.2, 0).getBlock().getType() == Material.WATER) {
                     cancel();
                     startFishing(hook, event);
                 }
@@ -138,6 +150,15 @@ public class FishingCastListener implements Listener {
                 if(hook.isDead()) {
                     event.setCancelled(true); // hasn't this... already happened if hook is dead?
                     cancel();
+                    return;
+                }
+
+                // TODO: merge with isDead check
+                if (event.getPlayer().isInWater()) {
+                    hook.remove();
+                    event.setCancelled(true);
+                    cancel();
+                    player.getWorld().playSound(player, Sound.ENTITY_FISHING_BOBBER_RETRIEVE, 1f, 1f);
                     return;
                 }
 
@@ -206,8 +227,8 @@ public class FishingCastListener implements Listener {
                 hookLoc = hook.getLocation();
                 hookLoc.getWorld().spawnParticle(Particle.SMOKE_NORMAL, hookLoc.clone().add(fishPos), 0);
 
-                // particles to help test swimpath nodes
-                hookLoc.getWorld().spawnParticle(Particle.FLAME, hookLoc.clone().add(target), 0);
+                // Uncomment to see testing particles for swimpath nodes
+//                hookLoc.getWorld().spawnParticle(Particle.FLAME, hookLoc.clone().add(target), 0);
             }
 
         }.runTaskTimer(Fishing.getInstance(), 0, 1);
@@ -221,13 +242,6 @@ public class FishingCastListener implements Listener {
         textDisplay.setShadowed(true);
         textDisplay.setBackgroundColor(Color.fromARGB(0));
 
-        // set interp
-//        Transformation transform = textDisplay.getTransformation();
-//        transform.getTranslation().set(0, 4, 0);
-//        textDisplay.setTransformation(transform);
-//        textDisplay.setInterpolationDuration(20);
-//        textDisplay.setInterpolationDelay(-1);
-
         Bukkit.getScheduler().scheduleSyncDelayedTask(Fishing.getInstance(), () -> {
             Transformation transform = textDisplay.getTransformation();
             transform.getTranslation().set(0, 2, 0);
@@ -238,12 +252,11 @@ public class FishingCastListener implements Listener {
 
         new BukkitRunnable() {
             int c = 0;
-            final long reelTime = System.currentTimeMillis();
 
             @Override
             public void run() {
                 c++;
-                if(c == user.getStatValue(Stat.REEL_TIME, true) * 20 || !user.hasHook()) {
+                if(c == 40 || !user.hasHook() || user.getFishHook().isDead() || event.getPlayer().isInWater()) {
 
                     textDisplay.remove();
 
