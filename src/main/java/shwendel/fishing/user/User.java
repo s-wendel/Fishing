@@ -15,7 +15,6 @@ public class User {
         CATCH
     }
 
-    private Player player;
     private UUID uuid;
     private int coins;
     private Map<Stat, Double> cache;
@@ -147,7 +146,7 @@ public class User {
     }
 
     public void setFishingState(FishingState fishingState) {
-        player.sendMessage("fishing state: " + fishingState);
+        getPlayer().sendMessage("fishing state: " + fishingState);
         this.fishingState = fishingState;
     }
 }
