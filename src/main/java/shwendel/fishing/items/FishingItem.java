@@ -20,12 +20,19 @@ public class FishingItem {
 
     public enum ID {
 
+        // Material
         DIRT,
+
+        // Armor
         EMERALD_CHESTPLATE,
+
+        // Fish
         COD,
         SALMON,
+
+        // Rod
         EXAMPLE_ROD,
-        ;
+
     }
 
     private ID id;
@@ -74,7 +81,7 @@ public class FishingItem {
         return stats;
     }
 
-    public ItemStack getItem() {
+    public ItemStack getItemStack() {
 
         ItemStack item = baseItem.clone();
         ItemMeta itemMeta = item.getItemMeta();
@@ -120,11 +127,9 @@ public class FishingItem {
 
         itemMeta.setDisplayName(ChatColor.WHITE + name);
         itemMeta.setLore(lore);
-        itemMeta.addItemFlags(new ItemFlag[] {
-                ItemFlag.HIDE_ENCHANTS,
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS,
                 ItemFlag.HIDE_ATTRIBUTES,
-                ItemFlag.HIDE_DYE
-        });
+                ItemFlag.HIDE_DYE);
 
         item.setItemMeta(itemMeta);
 

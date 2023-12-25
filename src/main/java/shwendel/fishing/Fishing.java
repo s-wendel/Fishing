@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import shwendel.fishing.crafting.command.CraftingCommand;
 import shwendel.fishing.crafting.listener.CraftingInventoryListener;
 import shwendel.fishing.fishing_mechanics.FishingCastListener;
+import shwendel.fishing.fishydex.FishydexListener;
 import shwendel.fishing.fishydex.fishtiary.commands.FishtiaryCommand;
 import shwendel.fishing.items.armor.ArmorEquipListener;
 import shwendel.fishing.items.command.FishingItemCommand;
@@ -30,6 +31,7 @@ public final class Fishing extends JavaPlugin {
         pluginManager.registerEvents(new ArmorEquipListener(), this);
         pluginManager.registerEvents(new CraftingInventoryListener(), this);
         pluginManager.registerEvents(new FishingCastListener(), this);
+        pluginManager.registerEvents(new FishydexListener(), this);
 
         getCommand("stats").setExecutor(new StatsCommand());
         getCommand("craft").setExecutor(new CraftingCommand());

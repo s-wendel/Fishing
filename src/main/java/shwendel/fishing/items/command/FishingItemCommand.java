@@ -44,7 +44,7 @@ public class FishingItemCommand implements CommandExecutor {
 
         }
 
-        target.getInventory().addItem(FishingItemManager.getItem(item).getItem());
+        target.getInventory().addItem(FishingItemManager.getItem(item).getItemStack());
 
         return true;
     }

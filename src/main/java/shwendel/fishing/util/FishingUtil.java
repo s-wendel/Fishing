@@ -2,12 +2,17 @@ package shwendel.fishing.util;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import shwendel.fishing.Fishing;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -62,6 +67,10 @@ public class FishingUtil {
         if(text.isEmpty())
             return "0s";
         return text;
+    }
+
+    public static NamespacedKey getNamespacedKey(String key) {
+        return new NamespacedKey(Fishing.getInstance(), key);
     }
 
 }

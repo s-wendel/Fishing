@@ -29,9 +29,6 @@ public abstract class FishtiarySet {
         return FishingItem.fromID(id);
     }
 
-    /**
-     * Inherited classes must implement, intended to be used to add multiple entries from one method
-     */
     protected void addEntries() {
         for (int i = 0; i < required.length; i++) {
             entries.add(new FishtiaryEntry(required[i], rewards[i], consumers[i]));
