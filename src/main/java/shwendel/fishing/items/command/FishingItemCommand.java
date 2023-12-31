@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.items.FishingItemManager;
-import shwendel.fishing.items.FishingItemMemory;
 
 public class FishingItemCommand implements CommandExecutor {
 
@@ -21,12 +20,12 @@ public class FishingItemCommand implements CommandExecutor {
             return true;
         }
 
-        FishingItem item = null;
+        FishingItem.ID item = null;
         Player target = null;
 
         try {
 
-            item = FishingItem.valueOf(args[0]);
+            item = FishingItem.ID.valueOf(args[0]);
             target = Bukkit.getPlayer(args[1]);
 
         } catch(Exception exception) {
@@ -45,7 +44,7 @@ public class FishingItemCommand implements CommandExecutor {
 
         }
 
-        target.getInventory().addItem(FishingItemManager.getItem(item).getItem());
+        target.getInventory().addItem(FishingItemManager.getItem(item).getItemStack());
 
         return true;
     }

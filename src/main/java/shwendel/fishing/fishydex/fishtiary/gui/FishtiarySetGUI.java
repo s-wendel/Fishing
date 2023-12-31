@@ -6,36 +6,27 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.inventory.ItemStack;
 import shwendel.fishing.fishydex.fishtiary.FishtiaryEntry;
 import shwendel.fishing.fishydex.fishtiary.FishtiarySet;
 import shwendel.fishing.items.FishingItem;
-import shwendel.fishing.items.FishingItemManager;
-import shwendel.fishing.items.FishingItemMemory;
+import shwendel.fishing.user.UserManager;
 import shwendel.fishing.util.ProgressBar;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import static shwendel.fishing.util.GuiUtil.*;
+
 public class FishtiarySetGUI extends Gui {
 
-    private static final Icon DOES_NOT_EXIST = new Icon(Material.GRAY_STAINED_GLASS_PANE)
-            .setName(ChatColor.DARK_GRAY + "???")
-            .setLore(
-                    ChatColor.GRAY + "???"
-            );
-    private static final Icon BLANK = new Icon(Material.BLACK_STAINED_GLASS_PANE)
-            .setName(" ");
-
-    private FishtiarySet set;
+    private final FishtiarySet set;
 
     public FishtiarySetGUI(Player player, FishtiarySet set) {
         super(
                 player,
-                set.getItem().toString() + "_FISHTIARYSET",
-                "Fishtiary ➡ " + FishingItemManager.getItem(set.getItem()).getName(),
-                6
+                "fishtiary-" + set.getID(),
+                "Fishtiary ➡ " + set.getItem().getName(),
+                6 // number of rows
         );
         this.set = set;
     }
@@ -43,52 +34,44 @@ public class FishtiarySetGUI extends Gui {
     @Override
     public void onOpen(InventoryOpenEvent event) {
 
-        FishingItemMemory fishingItemMemory = set.getItem().getFishingItemMemory();
-        String fishingItemName = fishingItemMemory.getName();
+        FishingItem fishingItem = set.getItem();
+        String fishingItemName = fishingItem.getName();
 
-        int total = 1; // The amount the player has collected TODO
+        int total = UserManager.getUser(player).getFishCaught(set.getID());
 
-        for(int i = 0; i < 54; i++) {
+        fillGui(BORDER);
+
+        addItem(4, new Icon(fishingItem.getItemStack())
+                .setLore()
+        );
+
+        addItem(49, backButton(e -> {
+                    closeSound(player);
+                    new FishtiaryGUI(player).open();
+                })
+        );
+
+        for(int i = 0; i < 54; i++) { // iterate over each inv slot
 
             int snakeIndex = getSnakeIndex(i);
 
             if(snakeIndex >= 0) {
 
-                FishtiaryEntry entry = set.getEntry(snakeIndex);
                 Icon icon;
 
-                if(entry == null) {
-
+                if (snakeIndex >= set.size()) {
                     icon = DOES_NOT_EXIST;
-
                 } else {
+                    FishtiaryEntry entry = set.getEntry(snakeIndex);
+                    boolean hasEnough = entry.getRequired() <= total;
+                    Material mat = hasEnough ? Material.LIME_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE;
 
-                    icon = new Icon(Material.LIME_STAINED_GLASS_PANE)
-                            .setName(ChatColor.GREEN + fishingItemName + " " + (snakeIndex + 1))
+                    icon = new Icon(mat)
+                            .setName((hasEnough ? ChatColor.GREEN : ChatColor.RED) + fishingItemName + " " + (snakeIndex + 1))
                             .setLore(getEntryLore(entry, total));
-
                 }
 
                 addItem(i, icon);
-                continue;
-            }
-
-            switch(i) {
-
-                case 4:
-                    // Mat
-                    break;
-
-                case 49:
-                    // Back button;
-                    break;
-
-                default:
-
-                    addItem(i, BLANK);
-
-                    break;
-
             }
 
         }
@@ -98,7 +81,7 @@ public class FishtiarySetGUI extends Gui {
     /**
      * Returns the snake index from an index in the GUI
      * @param slot The slot
-     * @return The snake index
+     * @return -1 if invalid snake slot, otherwise the snake index
      */
     private int getSnakeIndex(int slot) {
 
@@ -175,10 +158,10 @@ public class FishtiarySetGUI extends Gui {
 
     private List<String> getEntryLore(FishtiaryEntry entry, int total) {
 
-        String fishingItemName = entry.getItem().getFishingItemMemory().getName();
+        String fishingItemName = set.getItem().getName();
 
         int required = entry.getRequired();
-        double progress = (double) total / required;
+        double progress = Math.min(1.0, (double) total / required);
 
         List<String> lore = new ArrayList<>();
 
@@ -187,16 +170,14 @@ public class FishtiarySetGUI extends Gui {
         lore.add(ProgressBar.getProgressBar(progress));
         lore.add("");
 
-        List<String> rewards = entry.getRewards();
-        int rewardsSize = rewards.size();
-        boolean hasRewards = rewardsSize > 0;
+        String[] rewards = entry.getRewards();
 
-        if(hasRewards) {
+        if(rewards.length > 0) {
 
             lore.add(ChatColor.GREEN + "" + ChatColor.BOLD + "REWARDS");
 
-            for(int i = 0; i < rewardsSize; i++) {
-                lore.add(ChatColor.DARK_GRAY + "➡ " + ChatColor.WHITE + rewards.get(i));
+            for (String reward : rewards) {
+                lore.add(ChatColor.DARK_GRAY + "➡ " + ChatColor.WHITE + reward);
             }
 
             lore.add("");

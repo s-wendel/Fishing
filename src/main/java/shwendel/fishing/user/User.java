@@ -22,8 +22,8 @@ public class User {
     private FishHook currentFishHook;
     private long joinDate;
     private FishingState fishingState;
-    // Fishydex collection
-    //private Map<>
+    // Fishtiary collection
+    private HashMap<FishingItem.ID, Integer> fishCaught;
 
     public User(UUID uuid, int coins, long joinDate) {
         this.uuid = uuid;
@@ -40,6 +40,11 @@ public class User {
         }*/
 
         this.joinDate = joinDate;
+
+        // TODO: implement loading "fish caught" from DB
+        fishCaught = new HashMap<>();
+        fishCaught.put(FishingItem.ID.SALMON, 15);
+        fishCaught.put(FishingItem.ID.COD, 7);
 
     }
 
@@ -147,5 +152,12 @@ public class User {
 
     public void setFishingState(FishingState fishingState) {
         this.fishingState = fishingState;
+    }
+
+    public int getFishCaught(FishingItem.ID id) {
+        if (fishCaught.containsKey(id)) {
+            return fishCaught.get(id);
+        }
+        return 0;
     }
 }

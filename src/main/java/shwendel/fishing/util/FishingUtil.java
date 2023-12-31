@@ -2,24 +2,29 @@ package shwendel.fishing.util;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import shwendel.fishing.Fishing;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class FishingUtil {
 
-    public static ItemStack getHead(String uuid, String value, String url) {
-        PlayerProfile head = Bukkit.createProfile(UUID.fromString(uuid), "skin127569846");
-        head.setProperty(new ProfileProperty("textures", value, url));
+    public static ItemStack getHead(String texture) {
+        PlayerProfile profile = Bukkit.createProfile(UUID.randomUUID(), "name_test");
+        profile.setProperty(new ProfileProperty("textures", texture));
         ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
-        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
-        skullMeta.setPlayerProfile(head);
-        skull.setItemMeta(skullMeta);
+        SkullMeta meta = (SkullMeta) skull.getItemMeta();
+        meta.setPlayerProfile(profile);
+        skull.setItemMeta(meta);
         return skull;
     }
 
@@ -64,4 +69,9 @@ public class FishingUtil {
         return text;
     }
 
+    public static NamespacedKey getNamespacedKey(String key) {
+        return new NamespacedKey(Fishing.getInstance(), key);
+    }
+
 }
+

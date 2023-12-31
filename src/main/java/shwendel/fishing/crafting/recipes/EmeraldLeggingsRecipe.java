@@ -1,11 +1,5 @@
 package shwendel.fishing.crafting.recipes;
 
-import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.FishingItem;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /*public class EmeraldLeggingsRecipe extends ShapedRecipe {
 
     @Override
