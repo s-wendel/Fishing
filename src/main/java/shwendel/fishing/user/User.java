@@ -16,7 +16,7 @@ public class User {
     }
 
     private UUID uuid;
-    private int coins;
+    private long coins;
     private Map<Stat, Double> cache;
     //private Map<Stat, Map<FishingEquipment, Double>> stats;
     private FishHook currentFishHook;
@@ -25,7 +25,7 @@ public class User {
     // Fishtiary collection
     private HashMap<FishingItem.ID, Integer> fishCaught;
 
-    public User(UUID uuid, int coins, long joinDate) {
+    public User(UUID uuid, long coins, long joinDate) {
         this.uuid = uuid;
         this.coins = coins;
 
@@ -60,11 +60,11 @@ public class User {
         return Bukkit.getPlayer(uuid);
     }
 
-    public int getCoins() {
+    public long getCoins() {
         return coins;
     }
 
-    public void setCoins(int coins) {
+    public void setCoins(long coins) {
         this.coins = coins;
     }
 
@@ -100,9 +100,9 @@ public class User {
         return null;
     }*/
 
-    public void updateCache(Stat stat) {
+    /**public void updateCache(Stat stat) {
         cache.put(stat, getStatValue(stat, false));
-    }
+    }*/
 
     /*public void addEquipment(FishingEquipment item) {
         for(Stat stat : item.getStats().keySet()) {
