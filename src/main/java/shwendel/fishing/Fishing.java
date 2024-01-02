@@ -7,6 +7,7 @@ import shwendel.fishing.crafting.listener.CraftingInventoryListener;
 import shwendel.fishing.items.armor.ArmorEquipListener;
 import shwendel.fishing.items.command.FishingItemCommand;
 import shwendel.fishing.user.StatsCommand;
+import shwendel.fishing.user.listener.UserQuitListener;
 
 public final class Fishing extends JavaPlugin {
 
@@ -22,6 +23,7 @@ public final class Fishing extends JavaPlugin {
 
         pluginManager.registerEvents(new ArmorEquipListener(), this);
         pluginManager.registerEvents(new CraftingInventoryListener(), this);
+        pluginManager.registerEvents(new UserQuitListener(), this);
 
         getCommand("stats").setExecutor(new StatsCommand());
         getCommand("craft").setExecutor(new CraftingCommand());
