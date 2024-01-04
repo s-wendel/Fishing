@@ -14,16 +14,19 @@ public class StatsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-
         Player player = (Player) sender;
 
         if(args.length != 0) {
+
             try {
+
                 player = Bukkit.getPlayer(args[0]);
+
             } catch(Exception exception) {}
+
         }
 
-        User user = null;//UserManager.getUser(player);
+        User user = UserManager.getUser(player);
 
         sender.sendMessage("");
         sender.sendMessage(ChatColor.BOLD + "Stats of " + player.getName());
@@ -37,9 +40,9 @@ public class StatsCommand implements CommandExecutor {
 
         sender.sendMessage("");
 
-        for(Stat stat : Stat.values()) {
+        /*for(Stat stat : Stat.values()) {
             sender.sendMessage(stat.getColor() + stat.getIcon() + " " + ChatColor.GRAY + stat.getName() + stat.getColor() + " " + FishingUtil.displayNumber(user.getStatValue(stat, true)) + ChatColor.DARK_GRAY + " " + stat.getDescription());
-        }
+        }*/
 
         sender.sendMessage("");
 

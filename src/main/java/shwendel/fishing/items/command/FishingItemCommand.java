@@ -8,12 +8,19 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.items.FishingItemManager;
+import shwendel.fishing.items.FishingItemMemory;
+import shwendel.fishing.open_world.Tornado;
+import shwendel.fishing.open_world.Tornado;
 
 public class FishingItemCommand implements CommandExecutor {
 
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+
+        Tornado tornado = new Tornado(((Player) sender).getLocation());
+
+        tornado.run();
 
         // /fishingitem <item> <player>
         if(!sender.isOp()) {
