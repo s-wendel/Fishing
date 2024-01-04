@@ -1,7 +1,12 @@
 package shwendel.fishing.user;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import shwendel.fishing.database.Database;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
