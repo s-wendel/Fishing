@@ -1,0 +1,229 @@
+{
+  "Passengers": [
+    {
+      "id": "minecraft:block_display",
+      "block_state": {
+        "Name": "minecraft:oak_fence",
+        "Properties": {}
+      },
+      "transformation": [
+        0.75,
+        0,
+        0,
+        -0.1875,
+        0,
+        0.75,
+        0,
+        2.0625,
+        0,
+        0,
+        0.75,
+        -0.375,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "minecraft:block_display",
+      "block_state": {
+        "Name": "minecraft:oak_planks",
+        "Properties": {}
+      },
+      "transformation": [
+        0.375,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1.0625,
+        0,
+        0,
+        1,
+        -0.5,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "minecraft:block_display",
+      "block_state": {
+        "Name": "minecraft:oak_fence",
+        "Properties": {}
+      },
+      "transformation": [
+        0.75,
+        0,
+        0,
+        -0.1875,
+        0,
+        0.75,
+        0,
+        0.3125,
+        0,
+        0,
+        0.75,
+        -0.375,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "minecraft:block_display",
+      "block_state": {
+        "Name": "minecraft:oak_fence",
+        "Properties": {}
+      },
+      "transformation": [
+        0.75,
+        0,
+        0,
+        -0.1875,
+        0,
+        0,
+        -0.75,
+        1.9375,
+        0,
+        0.75,
+        0,
+        0.5,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "minecraft:block_display",
+      "block_state": {
+        "Name": "minecraft:oak_fence",
+        "Properties": {}
+      },
+      "transformation": [
+        0.75,
+        0,
+        0,
+        -0.1875,
+        0,
+        0,
+        -0.75,
+        1.9375,
+        0,
+        0.75,
+        0,
+        -1.25,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "minecraft:block_display",
+      "block_state": {
+        "Name": "minecraft:oak_fence",
+        "Properties": {}
+      },
+      "transformation": [
+        0.75,
+        0,
+        0,
+        -0.1875,
+        0,
+        0.5303,
+        -0.5303,
+        2.1875,
+        0,
+        0.5303,
+        0.5303,
+        0.125,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "minecraft:block_display",
+      "block_state": {
+        "Name": "minecraft:oak_fence",
+        "Properties": {}
+      },
+      "transformation": [
+        0.75,
+        0,
+        0,
+        -0.1875,
+        0,
+        0.5303,
+        0.5303,
+        1.6875,
+        0,
+        -0.5303,
+        0.5303,
+        -0.6875,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "minecraft:block_display",
+      "block_state": {
+        "Name": "minecraft:oak_fence",
+        "Properties": {}
+      },
+      "transformation": [
+        0.75,
+        0,
+        0,
+        -0.1875,
+        0,
+        -0.5303,
+        0.5303,
+        0.875,
+        0,
+        -0.5303,
+        -0.5303,
+        -0.125,
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "minecraft:block_display",
+      "block_state": {
+        "Name": "minecraft:oak_fence",
+        "Properties": {}
+      },
+      "transformation": [
+        0.75,
+        0,
+        0,
+        -0.1875,
+        0,
+        -0.5303,
+        -0.5303,
+        1.4375,
+        0,
+        0.5303,
+        -0.5303,
+        0.625,
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  ]
+}

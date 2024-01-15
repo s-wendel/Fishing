@@ -1,6 +1,5 @@
 package shwendel.fishing.fishing_mechanics;
 
-import jdk.javadoc.internal.doclint.HtmlTag;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.*;
@@ -14,15 +13,17 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Transformation;
 import org.bukkit.util.Vector;
+import org.joml.Math;
 import shwendel.fishing.Fishing;
-import shwendel.fishing.islands.Region;
-import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
 import shwendel.fishing.user.UserManager;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class FishingCastListener implements Listener {
+
+    private static ThreadLocalRandom random = ThreadLocalRandom.current();
 
     private final SwimpathNode[][] swimpathArray = {
             {
@@ -65,7 +66,7 @@ public class FishingCastListener implements Listener {
         switch (user.getFishingState()) {
             case PARRY:
                 FishHook hook = user.getFishHook();
-                player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 1, 1.4f + new Random().nextFloat(0.2f));
+                player.playSound(player, Sound.BLOCK_ANVIL_PLACE, 1f, (float) (1.4 + random.nextDouble(0.2)));
                 player.getWorld().spawnParticle(Particle.CRIT, hook.getLocation(), 10);
                 hook.setVelocity(new Vector(0, 0.11f, 0));
                 user.setFishingState(User.FishingState.NONE);

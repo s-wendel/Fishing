@@ -9,7 +9,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import shwendel.fishing.Fishing;
 import shwendel.fishing.islands.Region;
-import shwendel.fishing.items.armor.dirt.*;
 import shwendel.fishing.user.Stat;
 import shwendel.fishing.user.User;
 import shwendel.fishing.util.FishingUtil;

@@ -8,8 +8,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import shwendel.fishing.items.FishingItem;
 import shwendel.fishing.items.FishingItemManager;
-import shwendel.fishing.items.FishingItemMemory;
-import shwendel.fishing.open_world.Tornado;
 import shwendel.fishing.open_world.Tornado;
 
 public class FishingItemCommand implements CommandExecutor {
